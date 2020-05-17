@@ -1,9 +1,17 @@
 import { connect } from 'mqtt';
 import React, { useEffect, useState, useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { IoMdPower } from 'react-icons/io';
 
-import './App.css';
+const GlobalStyle = createGlobalStyle`
+  body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+		width: 100%;
+		text-align: center;
+  }
+`;
 
 enum State {
 	On,
@@ -54,15 +62,11 @@ function App() {
 
 	useEffect(() => {
 		client.on('message', (topic, message) => {
-			if (topic === 'temperature') {
-			}
 			switch (topic) {
 				case 'temperature':
-					console.log(message.toString());
 					setTemp(Number(message));
 					break;
 				case 'humidity':
-					console.log(message.toString());
 					setHumidity(Number(message));
 					break;
 				default:
@@ -94,6 +98,7 @@ function App() {
 
 	return (
 		<div className='App'>
+			<GlobalStyle />
 			<h1>Palletten</h1>
 			<div>Nuværende temperatur: {temp ?? 'unknown'} &#176;C</div>
 			<div>Nuværende fugtighed: {humidity}%</div>
