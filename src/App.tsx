@@ -1,7 +1,10 @@
 import { connect } from 'mqtt';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { IoMdPower } from 'react-icons/io';
+import { IPlace, IShelly, State } from './models';
+import { PlaceState } from './PlaceState';
+import { Shelly } from './Shelly';
+import { Button } from './Button';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -12,17 +15,6 @@ const GlobalStyle = createGlobalStyle`
 		text-align: center;
   }
 `;
-
-enum State {
-	On,
-	Off,
-}
-
-interface IShelly {
-	id: string;
-	name: string;
-	state?: State;
-}
 
 // const url = 'mqtt://test.mosquitto.org:8080';
 // const url = 'ws://localhost:9001'
@@ -37,13 +29,47 @@ const default_shellies: IShelly[] = [
 
 const client = connect(url);
 
-function setShellyState(shelly: IShelly, state: string = 'toggle') {
+export function setShellyState(shelly: IShelly, state: string = 'toggle') {
 	client.publish(`shellies/shelly1-${shelly.id}/relay/0/command`, state);
 }
 
-function App() {
-	const [temp, setTemp] = useState<number | undefined>();
+function getPlace(topic: string): string | undefined {
+	const match = topic.match(/\/(?<place>\w+)$/);
+	return match?.groups ? match?.groups['place'] : undefined;
+}
+
+export function stateToColor(state?: State): string {
+	switch (state) {
+		case State.Off:
+			return 'red';
+		case State.On:
+			return 'green';
+
+		default:
+			return 'grey';
+	}
+}
+
+function usePlace(): [
+	IPlace,
+	{
+		setTemperature: React.Dispatch<React.SetStateAction<number | undefined>>;
+		setHumidity: React.Dispatch<React.SetStateAction<number | undefined>>;
+	}
+] {
+	const [temperature, setTemperature] = useState<number | undefined>();
 	const [humidity, setHumidity] = useState<number | undefined>();
+
+	return [
+		{ temperature, humidity },
+		{ setTemperature, setHumidity },
+	];
+}
+
+function App() {
+	const [inside, setters] = usePlace();
+	const [outside, outSetters] = usePlace();
+
 	const [shellies, setShellies] = useState<IShelly[]>(default_shellies);
 	const ids = shellies.map((x) => x.id);
 
@@ -54,23 +80,34 @@ function App() {
 			ids.forEach((id) => {
 				client.subscribe(`shellies/shelly1-${id}/relay/0`, (err) => {});
 			});
-			client.subscribe('temperature', (err) => {});
-			client.subscribe('humidity', (err) => {});
+			['inside', 'outside'].forEach((x) => {
+				client.subscribe(`temperature/${x}`, (err) => {});
+				client.subscribe(`humidity/${x}`, (err) => {});
+			});
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		client.on('message', (topic, message) => {
-			switch (topic) {
-				case 'temperature':
-					setTemp(Number(message));
-					break;
-				case 'humidity':
-					setHumidity(Number(message));
-					break;
-				default:
-					break;
+			if (topic.startsWith('temperature/')) {
+				switch (getPlace(topic)) {
+					case 'inside':
+						setters?.setTemperature(Number(message));
+						break;
+					case 'outside':
+						outSetters?.setTemperature(Number(message));
+						break;
+				}
+			} else if (topic.startsWith('humidity/')) {
+				switch (getPlace(topic)) {
+					case 'inside':
+						setters.setHumidity(Number(message));
+						break;
+					case 'outside':
+						outSetters.setHumidity(Number(message));
+						break;
+				}
 			}
 
 			if (topic.startsWith('shellies')) {
@@ -87,7 +124,7 @@ function App() {
 				}
 			}
 		});
-	}, []);
+	}, [outSetters, setters]);
 
 	const allOn = useCallback(() => {
 		shellies.forEach((x) => setShellyState(x, 'on'));
@@ -97,11 +134,13 @@ function App() {
 	}, [shellies]);
 
 	return (
-		<div className='App'>
+		<div>
 			<GlobalStyle />
 			<h1>Palletten</h1>
-			<div>Nuværende temperatur: {temp ?? 'unknown'} &#176;C</div>
-			<div>Nuværende fugtighed: {humidity}%</div>
+			<PlaceContainer>
+				<PlaceState name='Indendørs' state={inside} />
+				<PlaceState name='Udendørs' state={outside} />
+			</PlaceContainer>
 			<ButtonContainer>
 				{shellies.map((shelly) => (
 					<Shelly key={shelly.id} shelly={shelly} />
@@ -117,40 +156,10 @@ function App() {
 
 export default App;
 
-function stateToColor(state?: State): string {
-	switch (state) {
-		case State.Off:
-			return 'red';
-		case State.On:
-			return 'green';
-
-		default:
-			return 'grey';
-	}
-}
-
-const Shelly = ({ shelly }: { shelly: IShelly }) => {
-	const toggle = useCallback(() => {
-		setShellyState(shelly);
-	}, [shelly]);
-
-	return (
-		<Button onClick={toggle} color={stateToColor(shelly.state)}>
-			<IconContainer>
-				<IoMdPower size='20px' />
-			</IconContainer>
-			{shelly.name}
-		</Button>
-	);
-};
-
-const Button = styled.button<{ color?: string }>`
-	background-color: ${(props) => props.color ?? 'blue'};
-	color: white;
-	padding: 10px;
-	margin: 6px;
-	font-size: 1.2em;
-	border-radius: 6px;
+const PlaceContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
 `;
 
 const ButtonContainer = styled.div`
@@ -160,7 +169,7 @@ const ButtonContainer = styled.div`
 	vertical-align: middle;
 `;
 
-const IconContainer = styled.span`
+export const IconContainer = styled.span`
 	display: inline-flex;
 	height: 100%;
 	justify-content: center;
