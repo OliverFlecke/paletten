@@ -138,8 +138,8 @@ function App() {
 			<GlobalStyle />
 			<h1>Palletten</h1>
 			<PlaceContainer>
-				<PlaceState name='Indendørs' state={inside} />
-				<PlaceState name='Udendørs' state={outside} />
+				<PlaceState name='Inde' state={inside} />
+				<PlaceState name='Ude' state={outside} />
 			</PlaceContainer>
 			<ButtonContainer>
 				{shellies.map((shelly) => (
@@ -159,7 +159,6 @@ export default App;
 const PlaceContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	padding: 0 20px;
 `;
 
 const ButtonContainer = styled.div`
