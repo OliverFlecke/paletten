@@ -78,11 +78,13 @@ function App() {
 			console.log('connected');
 
 			ids.forEach((id) => {
-				client.subscribe(`shellies/shelly1-${id}/relay/0`, (err) => {});
+				client.subscribe(`shellies/shelly1-${id}/relay/0`, (err) =>
+					console.error(err)
+				);
 			});
 			['inside', 'outside'].forEach((x) => {
-				client.subscribe(`temperature/${x}`, (err) => {});
-				client.subscribe(`humidity/${x}`, (err) => {});
+				client.subscribe(`temperature/${x}`, (err) => console.error(err));
+				client.subscribe(`humidity/${x}`, (err) => console.error(err));
 			});
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps

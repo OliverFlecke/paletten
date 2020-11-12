@@ -12,7 +12,7 @@ export const Shelly = ({ shelly }: { shelly: IShelly }) => {
 	return (
 		<Button onClick={toggle} color={stateToColor(shelly.state)}>
 			<IconContainer>
-				<IoMdPower size='20px' />
+				<IoMdPower size="20px" />
 			</IconContainer>
 			{shelly.name}
 		</Button>

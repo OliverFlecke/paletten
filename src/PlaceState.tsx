@@ -24,16 +24,16 @@ export const PlaceState = ({ state, name }: PlaceStateProps) => {
 };
 
 const Container = styled.div`
-  width: 100%;
-  max-width: 200px;
-  box-sizing: border-box;
-  padding: 0 10px;
+	width: 100%;
+	max-width: 200px;
+	box-sizing: border-box;
+	padding: 0 10px;
 `;
 
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
-  width: 100%;
+	width: 100%;
 `;
 
 const Name = styled.h3`

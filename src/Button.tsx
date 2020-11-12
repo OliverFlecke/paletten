@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const Button = styled.button<{
 	color?: string;
-}> `
+}>`
 	background-color: ${(props) => props.color ?? 'blue'};
 	color: white;
 	padding: 10px;
