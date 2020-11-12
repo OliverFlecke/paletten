@@ -7,13 +7,13 @@ import { PlaceState } from './PlaceState';
 import { Shelly } from './Shelly';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    padding: 0;
-    margin: 0;
-    height: 100%;
+	body {
+		padding: 0;
+		margin: 0;
+		height: 100%;
 		width: 100%;
 		text-align: center;
-  }
+	}
 `;
 
 // const url = 'mqtt://test.mosquitto.org:8080';
@@ -29,7 +29,7 @@ const default_shellies: IShelly[] = [
 
 const client = connect(url);
 
-export function setShellyState(shelly: IShelly, state: string = 'toggle') {
+export function setShellyState(shelly: IShelly, state = 'toggle') {
 	client.publish(`shellies/shelly1-${shelly.id}/relay/0/command`, state);
 }
 
@@ -138,8 +138,8 @@ function App() {
 			<GlobalStyle />
 			<h1>Palletten</h1>
 			<PlaceContainer>
-				<PlaceState name='Inde' state={inside} />
-				<PlaceState name='Ude' state={outside} />
+				<PlaceState name="Inde" state={inside} />
+				<PlaceState name="Ude" state={outside} />
 			</PlaceContainer>
 			<ButtonContainer>
 				{shellies.map((shelly) => (
@@ -206,9 +206,9 @@ const DesiredTemperature = () => {
 	return (
 		<div>
 			<TemperatureRange
-				type='range'
-				min='0'
-				max='25'
+				type="range"
+				min="0"
+				max="25"
 				value={temperature}
 				onChange={onDesiredTemperatureChange}
 			/>
