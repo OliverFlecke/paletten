@@ -1,20 +1,10 @@
 import { connect } from 'mqtt';
 import React, { useCallback, useEffect, useState } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { Button } from './Button';
 import { IPlace, IShelly, State } from './models';
 import { PlaceState } from './PlaceState';
 import { Shelly } from './Shelly';
-
-const GlobalStyle = createGlobalStyle`
-	body {
-		padding: 0;
-		margin: 0;
-		height: 100%;
-		width: 100%;
-		text-align: center;
-	}
-`;
 
 // const url = 'mqtt://test.mosquitto.org:8080';
 // const url = 'ws://localhost:9001'
@@ -136,18 +126,17 @@ function App() {
 	}, [shellies]);
 
 	return (
-		<div>
-			<GlobalStyle />
-			<h1>Palletten</h1>
-			<PlaceContainer>
+		<div className="flex flex-col justify-center">
+			<h1 className="text-4xl">Palletten</h1>
+			<div className="flex justify-between">
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
-			</PlaceContainer>
-			<ButtonContainer>
+			</div>
+			<div className="flex flex-col justify-center align-middle">
 				{shellies.map((shelly) => (
 					<Shelly key={shelly.id} shelly={shelly} />
 				))}
-			</ButtonContainer>
+			</div>
 
 			<hr />
 			<Button onClick={allOn}>Tænd alt</Button>
@@ -160,26 +149,6 @@ function App() {
 }
 
 export default App;
-
-const PlaceContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-`;
-
-const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	vertical-align: middle;
-`;
-
-export const IconContainer = styled.span`
-	display: inline-flex;
-	height: 100%;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0 6px;
-`;
 
 const DesiredTemperature = () => {
 	const [temperature, setTemperature] = useState<number>(0);
@@ -207,7 +176,8 @@ const DesiredTemperature = () => {
 
 	return (
 		<div>
-			<TemperatureRange
+			<input
+				className="w-11/12"
 				type="range"
 				min="0"
 				max="25"
@@ -218,8 +188,3 @@ const DesiredTemperature = () => {
 		</div>
 	);
 };
-
-const TemperatureRange = styled.input`
-	width: 90%;
-	box-sizing: border-box;
-`;

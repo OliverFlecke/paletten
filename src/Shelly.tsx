@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { IoMdPower } from 'react-icons/io';
-import { IconContainer, setShellyState, stateToColor } from './App';
+import { setShellyState, stateToColor } from './App';
 import { Button } from './Button';
 import { IShelly } from './models';
 
@@ -11,9 +11,9 @@ export const Shelly = ({ shelly }: { shelly: IShelly }) => {
 
 	return (
 		<Button onClick={toggle} color={stateToColor(shelly.state)}>
-			<IconContainer>
+			<span className="inline-flex flex-col h-full justify-center py-2">
 				<IoMdPower size="20px" />
-			</IconContainer>
+			</span>
 			{shelly.name}
 		</Button>
 	);
