@@ -121,7 +121,7 @@ function App() {
 	}, [shellies]);
 
 	return (
-		<div className="flex flex-col justify-center items-center text-center mx-4 dark:text-white">
+		<div className="flex flex-col justify-center items-center text-center mx-4 text-black dark:text-gray-500">
 			<h1 className="text-4xl">Palletten</h1>
 			<div className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
 				<PlaceState name="Inde" state={inside} />
@@ -134,12 +134,10 @@ function App() {
 			</div>
 
 			<hr className="w-full my-4" />
-			<Button className="w-full" onClick={allOn}>
-				Tænd alt
-			</Button>
-			<Button className="w-full" onClick={allOff}>
-				Sluk alt
-			</Button>
+			<div className="w-full flex flex-col justify-center align-middle">
+				<Button onClick={allOn}>Tænd alt</Button>
+				<Button onClick={allOff}>Sluk alt</Button>
+			</div>
 
 			<hr className="w-full my-4" />
 			<DesiredTemperature />

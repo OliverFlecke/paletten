@@ -11,10 +11,10 @@ export const Shelly = ({ shelly }: { shelly: IShelly }) => {
 
 	return (
 		<Button onClick={toggle} color={stateToColor(shelly.state)}>
-			<span className="inline-flex flex-col h-full justify-center py-2">
+			<span className="inline-flex flex-col h-full justify-center px-2">
 				<IoMdPower size="20px" />
 			</span>
-			{shelly.name}
+			<span>{shelly.name}</span>
 		</Button>
 	);
 };
