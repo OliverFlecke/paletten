@@ -1,6 +1,5 @@
 import { connect } from 'mqtt';
 import React, { useCallback, useEffect, useState } from 'react';
-import { createGlobalStyle } from 'styled-components';
 import { Button } from './Button';
 import { IPlace, IShelly, State } from './models';
 import { PlaceState } from './PlaceState';
@@ -126,23 +125,27 @@ function App() {
 	}, [shellies]);
 
 	return (
-		<div className="flex flex-col justify-center">
+		<div className="flex flex-col justify-center items-center text-center mx-4 dark:text-white">
 			<h1 className="text-4xl">Palletten</h1>
-			<div className="flex justify-between">
+			<div className="flex justify-between max-w-lg w-full">
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
 			</div>
-			<div className="flex flex-col justify-center align-middle">
+			<div className="w-full flex flex-col justify-center align-middle">
 				{shellies.map((shelly) => (
 					<Shelly key={shelly.id} shelly={shelly} />
 				))}
 			</div>
 
-			<hr />
-			<Button onClick={allOn}>Tænd alt</Button>
-			<Button onClick={allOff}>Sluk alt</Button>
+			<hr className="w-full my-4" />
+			<Button className="w-full" onClick={allOn}>
+				Tænd alt
+			</Button>
+			<Button className="w-full" onClick={allOff}>
+				Sluk alt
+			</Button>
 
-			<hr />
+			<hr className="w-full my-4" />
 			<DesiredTemperature />
 		</div>
 	);
@@ -175,7 +178,7 @@ const DesiredTemperature = () => {
 	}, [setTemperature]);
 
 	return (
-		<div>
+		<div className="w-full">
 			<input
 				className="w-11/12"
 				type="range"
