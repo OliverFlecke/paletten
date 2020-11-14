@@ -1,6 +1,6 @@
 {
 	"name": "temperature-website",
-	"homepage": "http://oliverflecke.github.io/palletten",
+	"homepage": "https://oliverflecke.me/palletten",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {

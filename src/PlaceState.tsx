@@ -1,6 +1,5 @@
 import React from 'react';
 import { IPlace } from './models';
-import styled from 'styled-components';
 
 interface PlaceStateProps {
 	state: IPlace;
@@ -9,35 +8,16 @@ interface PlaceStateProps {
 
 export const PlaceState = ({ state, name }: PlaceStateProps) => {
 	return (
-		<Container>
-			<Name>{name}</Name>
+		<div className="w-full max-w-xs">
+			<h3 className="">{name}</h3>
 
-			<Wrapper>
+			<div className="flex justify-between w-full">
 				Temperatur: <span>{state.temperature} &#176;C</span>
-			</Wrapper>
-			<Wrapper>
+			</div>
+			<div className="flex justify-between w-full">
 				Fugtighed:
 				<span>{state.humidity} %</span>
-			</Wrapper>
-		</Container>
+			</div>
+		</div>
 	);
 };
-
-const Container = styled.div`
-	width: 100%;
-	max-width: 200px;
-	box-sizing: border-box;
-	padding: 0 10px;
-`;
-
-const Wrapper = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-`;
-
-const Name = styled.h3`
-	padding: 0;
-	margin: 0;
-	margin-bottom: 6px;
-`;

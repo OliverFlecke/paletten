@@ -123,7 +123,7 @@ function App() {
 	return (
 		<div className="flex flex-col justify-center items-center text-center mx-4 dark:text-white">
 			<h1 className="text-4xl">Palletten</h1>
-			<div className="flex justify-between max-w-lg w-full">
+			<div className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
 			</div>
