@@ -5,10 +5,6 @@ import { IPlace, IShelly, State } from './models';
 import { PlaceState } from './PlaceState';
 import { Shelly } from './Shelly';
 
-// const url = 'mqtt://test.mosquitto.org:8080';
-// const url = 'ws://localhost:9001'
-// const url = 'ws://palletten.northeurope.azurecontainer.io:9001'
-
 const url = 'wss://palletten.northeurope.azurecontainer.io:8083';
 const default_shellies: IShelly[] = [
 	{ id: 'C4402D', name: 'Spisebord' },
