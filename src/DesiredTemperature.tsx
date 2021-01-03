@@ -42,7 +42,7 @@ export const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 		<div className="w-full">
 			<div className="space-x-2 h-full">
 				<span className="h-full align-middle">
-					Automatisk temperatur kontrol?
+					Automatisk temperaturkontrol?
 				</span>
 				<input
 					type="checkbox"
