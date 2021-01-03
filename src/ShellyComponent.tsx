@@ -1,18 +1,14 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { IoMdPower } from 'react-icons/io';
-import { setShellyState, stateToColor } from './App';
+import { stateToColor } from './App';
 import { Button } from './Button';
 import { IShelly, State } from './models';
 
-export const Shelly = ({ shelly }: { shelly: IShelly }) => {
-	const toggle = useCallback(() => {
-		setShellyState(shelly);
-	}, [shelly]);
-
+export const ShellyComponent = ({ shelly }: { shelly: IShelly }) => {
 	return (
 		<Button
 			className="space-x-4"
-			onClick={toggle}
+			onClick={shelly.toggle}
 			color={stateToColor(shelly.state)}
 		>
 			<span className="inline-flex flex-col h-full justify-center align-middle">
