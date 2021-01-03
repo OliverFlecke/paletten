@@ -126,7 +126,7 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 			</div>
 
 			<hr className="w-full my-4" />
-			<DesiredTemperature />
+			<DesiredTemperature client={client} />
 		</div>
 	);
 };
