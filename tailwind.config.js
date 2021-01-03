@@ -8,12 +8,9 @@ module.exports = {
 		enable: true,
 		content: ['src/**/*.tsx'],
 	},
+	darkMode: 'media',
 	theme: {
-		extend: {
-			screens: {
-				dark: { raw: '(prefers-color-scheme: dark)' },
-			},
-		},
+		extend: {},
 	},
 	variants: {},
 	plugins: [],
