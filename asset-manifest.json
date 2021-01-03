@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/palletten/static/css/main.17fe73fc.chunk.css",
+    "main.css": "/palletten/static/css/main.2943a79e.chunk.css",
     "main.js": "/palletten/static/js/main.d8fb18f8.chunk.js",
     "main.js.map": "/palletten/static/js/main.d8fb18f8.chunk.js.map",
     "runtime-main.js": "/palletten/static/js/runtime-main.c4b1535e.js",
@@ -8,13 +8,13 @@
     "static/js/2.710556e9.chunk.js": "/palletten/static/js/2.710556e9.chunk.js",
     "static/js/2.710556e9.chunk.js.map": "/palletten/static/js/2.710556e9.chunk.js.map",
     "index.html": "/palletten/index.html",
-    "static/css/main.17fe73fc.chunk.css.map": "/palletten/static/css/main.17fe73fc.chunk.css.map",
+    "static/css/main.2943a79e.chunk.css.map": "/palletten/static/css/main.2943a79e.chunk.css.map",
     "static/js/2.710556e9.chunk.js.LICENSE.txt": "/palletten/static/js/2.710556e9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c4b1535e.js",
     "static/js/2.710556e9.chunk.js",
-    "static/css/main.17fe73fc.chunk.css",
+    "static/css/main.2943a79e.chunk.css",
     "static/js/main.d8fb18f8.chunk.js"
   ]
 }
