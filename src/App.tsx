@@ -10,7 +10,8 @@ import { IPlace, IShelly, Shelly, State } from './models';
 import { PlaceState } from './PlaceState';
 import { ShellyComponent } from './ShellyComponent';
 
-const url = 'wss://palletten.northeurope.azurecontainer.io:8083';
+const url = 'wss://palletten.oliverflecke.me:9001';
+
 const shelly_data = [
 	{ id: 'C4402D', name: 'Spisebord' },
 	{ id: 'C431FB', name: 'Sofa' },
@@ -20,20 +21,33 @@ const shelly_data = [
 const mqttOptions: IClientSubscribeOptions = { qos: 1 };
 
 function App() {
-	const [client, setClient] = useState<AsyncMqttClient | undefined>();
+	const [client, setClient] = useState<AsyncMqttClient | null | undefined>();
 
 	useEffect(() => {
 		async function connect() {
-			setClient(await connectAsync(url));
+			try {
+				const client = await connectAsync(url, undefined, false);
+				setClient(client);
+			} catch (err) {
+				console.warn(err);
+				setClient(null);
+			}
 		}
 		connect();
 	}, []);
 
-	if (!client) {
+	if (client === undefined) {
 		return (
-			<div className="text-black dark:text-white w-full text-center text-xl">
+			<h2 className="text-black dark:text-white w-full text-center text-xl">
 				Connecting...
-			</div>
+			</h2>
+		);
+	}
+	if (client === null) {
+		return (
+			<h2 className="text-black dark:text-white w-full text-center text-xl">
+				Failed to connect. Please contact website developer
+			</h2>
 		);
 	}
 
