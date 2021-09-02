@@ -1,6 +1,6 @@
-# Website for Palletten
+# Website for Paletten
 
-Contains website for palletten.
+Contains website for paletten.
 
 ## Build
 
