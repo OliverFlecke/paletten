@@ -4,6 +4,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
+		"dev": "concurrently --kill-others --names \"JS,CSS\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn start\" \"yarn css\"",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"postbuild": "react-snap",
@@ -12,7 +13,7 @@
 		"predeploy": "yarn run build",
 		"deploy": "gh-pages -d build",
 		"lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
-		"css": "npx postcss src/styles.css -o src/index.css"
+		"css": "TAILWIND_MODE=watch yarn postcss src/styles.css -o src/index.css -v --watch"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -50,6 +51,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.7.0",
 		"@typescript-eslint/parser": "^4.7.0",
 		"autoprefixer": "^10.1.0",
+		"concurrently": "^6.2.1",
 		"eslint": "^7.13.0",
 		"eslint-config-prettier": "^6.15.0",
 		"eslint-plugin-prettier": "^3.1.4",
@@ -63,7 +65,7 @@
 		"postcss-nesting": "^7.0.1",
 		"prettier": "^2.1.2",
 		"react-snap": "^1.23.0",
-		"tailwindcss": "^2.0.2",
+		"tailwindcss": "^2.2.9",
 		"typescript": "^4.0.5"
 	}
 }

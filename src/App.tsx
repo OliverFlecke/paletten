@@ -9,6 +9,7 @@ import { DesiredTemperature } from './DesiredTemperature';
 import { IPlace, IShelly, Shelly, State } from './models';
 import { PlaceState } from './PlaceState';
 import { ShellyComponent } from './ShellyComponent';
+import colors from 'tailwindcss/colors';
 
 const url = 'wss://paletten.oliverflecke.me:9001';
 
@@ -16,6 +17,17 @@ const shelly_data = [
 	{ id: 'C4402D', name: 'Spisebord' },
 	{ id: 'C431FB', name: 'Sofa' },
 	{ id: '10DB9C', name: 'Soveværelse' },
+];
+
+const titleColors = [
+	colors.rose,
+	colors.indigo,
+	colors.teal,
+	colors.lime,
+	colors.purple,
+	colors.cyan,
+	colors.red,
+	colors.amber,
 ];
 
 const mqttOptions: IClientSubscribeOptions = { qos: 1 };
@@ -122,7 +134,18 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 
 	return (
 		<div className="flex flex-col justify-center items-center text-center mx-4 text-black dark:text-gray-500">
-			<h1 className="text-4xl pt-2">Paletten</h1>
+			<h1 className="text-4xl pt-2">
+				{'Paletten'.split('').map((c, i) => (
+					<span
+						key={i}
+						style={{
+							color: titleColors[i]['500'],
+						}}
+					>
+						{c}
+					</span>
+				))}
+			</h1>
 			<div className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
