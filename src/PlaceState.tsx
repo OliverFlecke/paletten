@@ -9,7 +9,7 @@ interface PlaceStateProps {
 export const PlaceState = ({ state, name }: PlaceStateProps) => {
 	return (
 		<div className="w-full max-w-xs">
-			<h3 className="text-xl">{name}</h3>
+			<h2 className="text-xl">{name}</h2>
 
 			<div className="flex justify-between w-full">
 				Temperatur: <span>{state.temperature} &#176;C</span>

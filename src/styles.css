@@ -8,7 +8,26 @@ body {
 	font-family: Futura, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 		'Open Sans', 'Helvetica Neue', sans-serif;
 
-	@media (prefers-color-scheme: dark) {
-		background-color: black;
-	}
+	@apply dark:bg-gray-900;
+}
+
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	background: white;
+	color: white;
+}
+input[type='range'] {
+	color: white;
+	--range: calc(var(--max) - var(--min));
+	--ratio: calc((var(--value) - var(--min)) / var(--range));
+	--sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+}
+input[type='range']::-webkit-slider-runnable-track {
+	background: linear-gradient(rgb(30, 58, 138), rgb(30, 58, 138)) 0 / var(--sx)
+			100% no-repeat,
+		rgb(107, 114, 128);
+	border-radius: 10px;
 }

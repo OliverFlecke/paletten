@@ -41,26 +41,41 @@ export const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 	return (
 		<div className="w-full">
 			<div className="space-x-2 h-full">
-				<span className="h-full align-middle">
+				<label
+					htmlFor="temperature-control"
+					className="h-full align-middle text-xl"
+				>
 					Automatisk temperaturkontrol?
-				</span>
+				</label>
 				<input
+					id="temperature-control"
 					type="checkbox"
 					onChange={toggleActive}
 					checked={active}
 					className="w-6 h-6 align-middle"
 				/>
 			</div>
-			<div hidden={!active}>
+			<div hidden={!active} className="pt-4">
 				<input
-					className="w-11/12"
+					id="temperature-range"
+					className="w-11/12 bg-transparent slider-progress"
+					style={
+						{
+							'--min': 0,
+							'--max': 25,
+							'--value': temperature,
+							// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						} as any
+					}
 					type="range"
 					min="0"
 					max="25"
 					value={temperature}
 					onChange={onDesiredTemperatureChange}
 				/>
-				<div>Ønskede temperature: {temperature} &#176;C</div>
+				<label htmlFor="temperature-range">
+					Ønskede temperature: {temperature} &#176;C
+				</label>
 			</div>
 		</div>
 	);

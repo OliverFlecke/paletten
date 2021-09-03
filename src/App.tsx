@@ -133,7 +133,7 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 	]);
 
 	return (
-		<div className="flex flex-col justify-center items-center text-center mx-4 text-black dark:text-gray-500">
+		<div className="flex flex-col justify-center items-center text-center mx-4 text-gray-700 dark:text-gray-300">
 			<h1 className="text-4xl pt-2">
 				{'Paletten'.split('').map((c, i) => (
 					<span
