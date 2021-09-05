@@ -3,13 +3,13 @@ import {
 	connectAsync,
 	IClientSubscribeOptions,
 } from 'async-mqtt';
-import React, { useCallback, useEffect, useState } from 'react';
-import colors from 'tailwindcss/colors';
-import { Button } from './Button';
-import { DesiredTemperature } from './DesiredTemperature';
+import React, { useEffect, useState } from 'react';
+import AppTitle from './components/AppTitle';
+import DesiredTemperature from './components/DesiredTemperature';
+import MasterButtons from './components/MasterButtons';
+import PlaceState from './components/PlaceState';
+import ShellyComponent from './components/ShellyComponent';
 import { IPlace, IShelly, Shelly, State } from './models';
-import { PlaceState } from './PlaceState';
-import { ShellyComponent } from './ShellyComponent';
 
 const url = 'wss://paletten.oliverflecke.me:9001';
 
@@ -17,17 +17,6 @@ const shelly_data = [
 	{ id: 'C4402D', name: 'Spisebord' },
 	{ id: 'C431FB', name: 'Sofa' },
 	{ id: '10DB9C', name: 'Soveværelse' },
-];
-
-const titleColors = [
-	colors.rose,
-	colors.indigo,
-	colors.teal,
-	colors.lime,
-	colors.purple,
-	colors.cyan,
-	colors.red,
-	colors.amber,
 ];
 
 const mqttOptions: IClientSubscribeOptions = { qos: 1 };
@@ -190,42 +179,3 @@ function usePlace(): [
 		{ setTemperature, setHumidity },
 	];
 }
-
-interface MasterButtonsProps {
-	shellies: IShelly[];
-}
-
-const MasterButtons = ({ shellies }: MasterButtonsProps) => {
-	const allOn = useCallback(() => shellies.forEach((s) => s.setState('on')), [
-		shellies,
-	]);
-	const allOff = useCallback(() => shellies.forEach((s) => s.setState('off')), [
-		shellies,
-	]);
-
-	return (
-		<div className="w-full flex flex-row">
-			<Button onClick={allOn} className="flex-grow">
-				Tænd alt
-			</Button>
-			<Button onClick={allOff} className="flex-grow">
-				Sluk alt
-			</Button>
-		</div>
-	);
-};
-
-const AppTitle = () => (
-	<h1 className="text-4xl pt-2">
-		{'Paletten'.split('').map((c, i) => (
-			<span
-				key={i}
-				style={{
-					color: titleColors[i]['500'],
-				}}
-			>
-				{c}
-			</span>
-		))}
-	</h1>
-);

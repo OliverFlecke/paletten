@@ -9,7 +9,7 @@ body {
 		'Open Sans', 'Helvetica Neue', sans-serif;
 
 	@apply min-h-screen;
-	@apply bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900;
+	@apply bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900 dark:bg-black;
 }
 
 input[type='range']::-webkit-slider-thumb {

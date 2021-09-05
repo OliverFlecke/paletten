@@ -1,10 +1,10 @@
 import React from 'react';
 import { IoMdPower } from 'react-icons/io';
-import { stateToColor } from './App';
+import { stateToColor } from '../App';
 import { Button } from './Button';
-import { IShelly, State } from './models';
+import { IShelly, State } from '../models';
 
-export const ShellyComponent = ({ shelly }: { shelly: IShelly }) => {
+const ShellyComponent = ({ shelly }: { shelly: IShelly }) => {
 	return (
 		<Button
 			className="space-x-4"
@@ -20,3 +20,5 @@ export const ShellyComponent = ({ shelly }: { shelly: IShelly }) => {
 		</Button>
 	);
 };
+
+export default ShellyComponent;

@@ -1,12 +1,12 @@
 import React from 'react';
-import { IPlace } from './models';
+import { IPlace } from '../models';
 
 interface PlaceStateProps {
 	state: IPlace;
 	name: string;
 }
 
-export const PlaceState = ({ state, name }: PlaceStateProps) => {
+const PlaceState = ({ state, name }: PlaceStateProps) => {
 	return (
 		<div className="w-full max-w-xs">
 			<h2 className="text-xl">{name}</h2>
@@ -21,3 +21,5 @@ export const PlaceState = ({ state, name }: PlaceStateProps) => {
 		</div>
 	);
 };
+
+export default PlaceState;

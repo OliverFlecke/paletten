@@ -1,7 +1,7 @@
 import { AsyncMqttClient } from 'async-mqtt';
 import React, { useCallback, useEffect, useState } from 'react';
 
-export const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
+const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 	const [temperature, setTemperature] = useState<number>(0);
 	const onDesiredTemperatureChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,3 +80,5 @@ export const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 		</div>
 	);
 };
+
+export default DesiredTemperature;
