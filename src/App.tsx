@@ -9,6 +9,7 @@ import DesiredTemperature from './components/DesiredTemperature';
 import MasterButtons from './components/MasterButtons';
 import PlaceState from './components/PlaceState';
 import ShellyComponent from './components/ShellyComponent';
+import TemperatureHistory from './components/TemperatureHistory';
 import { IPlace, IShelly, Shelly, State } from './models';
 
 const url = 'wss://paletten.oliverflecke.me:9001';
@@ -115,24 +116,27 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 	}, [client]);
 
 	return (
-		<div className="flex flex-col justify-center items-center text-center mx-4 text-gray-700 dark:text-gray-300">
+		<>
 			<AppTitle />
-			<div className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
+			<section className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
-			</div>
-			<div className="w-full flex flex-col justify-center align-middle">
+			</section>
+			<section className="w-full flex flex-col justify-center align-middle">
 				{shellies.map((shelly) => (
 					<ShellyComponent key={shelly.id} shelly={shelly} />
 				))}
-			</div>
+			</section>
 
-			<hr className="w-full my-4" />
+			<Seperator />
 			<MasterButtons shellies={shellies} />
 
-			<hr className="w-full my-4" />
+			<Seperator />
 			<DesiredTemperature client={client} />
-		</div>
+
+			<Seperator />
+			<TemperatureHistory client={client} />
+		</>
 	);
 };
 
@@ -179,3 +183,5 @@ function usePlace(): [
 		{ setTemperature, setHumidity },
 	];
 }
+
+const Seperator = () => <hr className="w-full my-4" />;

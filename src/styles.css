@@ -12,6 +12,10 @@ body {
 	@apply bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900 dark:bg-black;
 }
 
+#root {
+	@apply flex flex-col justify-center items-center text-center mx-4 text-gray-700 dark:text-gray-300;
+}
+
 input[type='range']::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	height: 16px;
