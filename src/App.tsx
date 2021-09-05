@@ -4,12 +4,12 @@ import {
 	IClientSubscribeOptions,
 } from 'async-mqtt';
 import React, { useCallback, useEffect, useState } from 'react';
+import colors from 'tailwindcss/colors';
 import { Button } from './Button';
 import { DesiredTemperature } from './DesiredTemperature';
 import { IPlace, IShelly, Shelly, State } from './models';
 import { PlaceState } from './PlaceState';
 import { ShellyComponent } from './ShellyComponent';
-import colors from 'tailwindcss/colors';
 
 const url = 'wss://paletten.oliverflecke.me:9001';
 
@@ -125,27 +125,9 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [client]);
 
-	const allOn = useCallback(() => shellies.forEach((s) => s.setState('on')), [
-		shellies,
-	]);
-	const allOff = useCallback(() => shellies.forEach((s) => s.setState('off')), [
-		shellies,
-	]);
-
 	return (
 		<div className="flex flex-col justify-center items-center text-center mx-4 text-gray-700 dark:text-gray-300">
-			<h1 className="text-4xl pt-2">
-				{'Paletten'.split('').map((c, i) => (
-					<span
-						key={i}
-						style={{
-							color: titleColors[i]['500'],
-						}}
-					>
-						{c}
-					</span>
-				))}
-			</h1>
+			<AppTitle />
 			<div className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
@@ -157,14 +139,7 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 			</div>
 
 			<hr className="w-full my-4" />
-			<div className="w-full flex flex-row">
-				<Button onClick={allOn} className="flex-grow">
-					Tænd alt
-				</Button>
-				<Button onClick={allOff} className="flex-grow">
-					Sluk alt
-				</Button>
-			</div>
+			<MasterButtons shellies={shellies} />
 
 			<hr className="w-full my-4" />
 			<DesiredTemperature client={client} />
@@ -215,3 +190,42 @@ function usePlace(): [
 		{ setTemperature, setHumidity },
 	];
 }
+
+interface MasterButtonsProps {
+	shellies: IShelly[];
+}
+
+const MasterButtons = ({ shellies }: MasterButtonsProps) => {
+	const allOn = useCallback(() => shellies.forEach((s) => s.setState('on')), [
+		shellies,
+	]);
+	const allOff = useCallback(() => shellies.forEach((s) => s.setState('off')), [
+		shellies,
+	]);
+
+	return (
+		<div className="w-full flex flex-row">
+			<Button onClick={allOn} className="flex-grow">
+				Tænd alt
+			</Button>
+			<Button onClick={allOff} className="flex-grow">
+				Sluk alt
+			</Button>
+		</div>
+	);
+};
+
+const AppTitle = () => (
+	<h1 className="text-4xl pt-2">
+		{'Paletten'.split('').map((c, i) => (
+			<span
+				key={i}
+				style={{
+					color: titleColors[i]['500'],
+				}}
+			>
+				{c}
+			</span>
+		))}
+	</h1>
+);
