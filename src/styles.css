@@ -8,7 +8,8 @@ body {
 	font-family: Futura, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 		'Open Sans', 'Helvetica Neue', sans-serif;
 
-	@apply dark:bg-gray-900;
+	@apply min-h-screen;
+	@apply bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900;
 }
 
 input[type='range']::-webkit-slider-thumb {

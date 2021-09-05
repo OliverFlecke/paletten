@@ -157,9 +157,13 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 			</div>
 
 			<hr className="w-full my-4" />
-			<div className="w-full flex flex-col justify-center align-middle">
-				<Button onClick={allOn}>Tænd alt</Button>
-				<Button onClick={allOff}>Sluk alt</Button>
+			<div className="w-full flex flex-row">
+				<Button onClick={allOn} className="flex-grow">
+					Tænd alt
+				</Button>
+				<Button onClick={allOff} className="flex-grow">
+					Sluk alt
+				</Button>
 			</div>
 
 			<hr className="w-full my-4" />
