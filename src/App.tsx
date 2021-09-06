@@ -10,6 +10,7 @@ import MasterButtons from './components/MasterButtons';
 import PlaceState from './components/PlaceState';
 import ShellyComponent from './components/ShellyComponent';
 import TemperatureHistory from './components/TemperatureHistory';
+import CurrentWeather from './features/Weather/CurrentWeather';
 import { IPlace, IShelly, Shelly, State } from './models';
 import { version } from './serviceWorker';
 
@@ -139,6 +140,9 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 
 			<Seperator />
 			<DesiredTemperature client={client} />
+
+			<Seperator />
+			<CurrentWeather />
 
 			<Seperator />
 			<TemperatureHistory client={client} />
