@@ -7,7 +7,6 @@
 		"dev": "concurrently --kill-others --names \"JS,CSS\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn start\" \"yarn css\"",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"postbuild": "react-snap",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"predeploy": "yarn run build",
