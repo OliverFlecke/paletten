@@ -8,6 +8,7 @@ import {
 	getCurrentWeather,
 	WeatherMain,
 } from './weatherApi';
+import WeatherDetails from './WeatherDetails';
 import Wind from './Wind';
 
 const CurrentWeather = memo(() => {
@@ -32,6 +33,7 @@ const CurrentWeather = memo(() => {
 			<Wind {...weather.wind} />
 			{weather.rain && <FalldownVolume {...weather.rain} type={'Rain'} />}
 			{weather.snow && <FalldownVolume {...weather.snow} type={'Snow'} />}
+			<WeatherDetails {...weather.main} visibility={weather.visibility} />
 		</>
 	);
 });
