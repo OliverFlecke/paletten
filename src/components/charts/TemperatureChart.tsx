@@ -19,7 +19,7 @@ const BarGraph = ({ data }: BarGraphProps) => {
 		<ParentSize>
 			{({ width }) => {
 				const height = 150;
-				const margin = { top: 20, bottom: 20, left: 30, right: 20 };
+				const margin = { top: 20, bottom: 20, left: 30, right: 0 };
 
 				const xMax = width - margin.left - margin.right;
 				const yMax = height - margin.top - margin.bottom;
