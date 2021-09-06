@@ -11,6 +11,7 @@ import PlaceState from './components/PlaceState';
 import ShellyComponent from './components/ShellyComponent';
 import TemperatureHistory from './components/TemperatureHistory';
 import { IPlace, IShelly, Shelly, State } from './models';
+import { version } from './serviceWorker';
 
 const url = 'wss://paletten.oliverflecke.me:9001';
 
@@ -53,7 +54,12 @@ function App() {
 		);
 	}
 
-	return <Main client={client} />;
+	return (
+		<>
+			<Main client={client} />
+			<span className="text-sm">Version: {version}</span>
+		</>
+	);
 }
 
 export default App;
