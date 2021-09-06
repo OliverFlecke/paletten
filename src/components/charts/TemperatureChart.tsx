@@ -3,6 +3,7 @@ import { Group } from '@visx/group';
 import { ParentSize } from '@visx/responsive';
 import { scaleBand, scaleLinear } from '@visx/scale';
 import { Bar } from '@visx/shape';
+import { getHours } from 'date-fns';
 import React from 'react';
 import colors from 'tailwindcss/colors';
 import { TemperatureEntry } from '../../models';
@@ -41,6 +42,9 @@ const BarGraph = ({ data }: BarGraphProps) => {
 				const compose = (scale, accessor) => (data) => scale(accessor(data));
 				const xPoint = compose(xScale, x);
 				const yPoint = compose(yScale, y);
+
+				const hourOffset = new Date().getTimezoneOffset() / 60;
+
 				return (
 					<svg width={width} height={height}>
 						{data.map((d, i) => {
@@ -60,7 +64,7 @@ const BarGraph = ({ data }: BarGraphProps) => {
 						<AxisBottom
 							top={yMax + 10}
 							scale={xScale}
-							tickFormat={(d: Date) => `${d.getHours()}`}
+							tickFormat={(d: Date) => `${getHours(d) - hourOffset}`}
 							stroke={axisColor}
 							tickStroke={axisColor}
 							tickLabelProps={() => ({
