@@ -5,11 +5,12 @@ import { scaleBand, scaleLinear } from '@visx/scale';
 import { Bar } from '@visx/shape';
 import React from 'react';
 import colors from 'tailwindcss/colors';
+import { TemperatureEntry } from '../../models';
 
 const axisColor = colors.purple['500'];
 
 interface BarGraphProps {
-	data: any[];
+	data: TemperatureEntry[];
 }
 
 const BarGraph = ({ data }: BarGraphProps) => {
@@ -34,10 +35,9 @@ const BarGraph = ({ data }: BarGraphProps) => {
 				const yScale = scaleLinear({
 					range: [yMax, 0],
 					round: true,
-					domain: [0, Math.max(...data.map(y))],
+					domain: [Math.min(...data.map(y)) - 2, Math.max(...data.map(y))],
 				});
 
-				// Compose together the scale and accessor functions to get point functions
 				const compose = (scale, accessor) => (data) => scale(accessor(data));
 				const xPoint = compose(xScale, x);
 				const yPoint = compose(yScale, y);

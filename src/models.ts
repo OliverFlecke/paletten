@@ -34,3 +34,9 @@ export interface IPlace {
 	temperature?: number;
 	humidity?: number;
 }
+
+export interface TemperatureEntry {
+	time: Date;
+	temp: number;
+	hum: number;
+}

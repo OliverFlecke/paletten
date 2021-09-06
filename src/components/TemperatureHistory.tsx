@@ -1,5 +1,7 @@
 import { AsyncMqttClient } from 'async-mqtt';
+import { parse } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import { TemperatureEntry } from '../models';
 import { average, groupBy, uniqueHour } from '../utils/general';
 import TemperatureChart from './charts/TemperatureChart';
 
@@ -38,24 +40,18 @@ const TemperatureHistory = ({ client }: TemperatureHistoryProps) => {
 
 export default TemperatureHistory;
 
-interface TemperatureEntry {
-	time: Date;
-	temp: number;
-	hum: number;
-}
-
 function parseData(message: Buffer): TemperatureEntry[] {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const values = (JSON.parse(message.toString()) as any[]).map((x) => ({
 		...x,
-		time: new Date(x.time),
+		time: parse(x.time, 'yyyy-MM-dd HH:mm:ss', 0),
 	}));
 
 	const group = groupBy(values, (x) => uniqueHour(x.time));
 
 	return Object.keys(group)
 		.map((x) => ({
-			time: new Date(Date.parse(`${x}:00:00`)),
+			time: parse(x, 'yyyy-MM-dd HH', 0),
 			temp: average(group[x].map((v) => v.temp)),
 			hum: average(group[x].map((v) => v.hum)),
 		}))
