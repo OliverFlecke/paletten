@@ -1,8 +1,9 @@
 import React from 'react';
 import { WiBarometer, WiFog, WiHumidity } from 'react-icons/wi';
-import { WeatherMain } from './weatherApi';
 
-interface WeatherDetailsProps extends WeatherMain {
+interface WeatherDetailsProps {
+	humidity: number;
+	pressure: number;
 	visibility: number;
 }
 

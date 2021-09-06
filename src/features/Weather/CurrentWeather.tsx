@@ -1,58 +1,40 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { IoIosRefresh } from 'react-icons/io';
+import React, { memo } from 'react';
 import FalldownVolume from './FalldownVolume';
 import OpenWeatherMapIcon from './OpenWeatherMapIcon';
 import SunriseAndSunset from './SunriseAndSunset';
-import {
-	CurrentWeatherResponse,
-	getCurrentWeather,
-	WeatherMain,
-} from './weatherApi';
+import { WeatherCurrentResponse } from './weatherApi';
 import WeatherDetails from './WeatherDetails';
 import Wind from './Wind';
 
-const CurrentWeather = memo(() => {
-	const [weather, setWeather] = useState<CurrentWeatherResponse | undefined>();
-
-	const refresh = useCallback(() => getCurrentWeather().then(setWeather), [
-		setWeather,
-	]);
-
-	useEffect(() => {
-		refresh();
-	}, [refresh]);
-
-	if (!weather) return null;
-
-	return (
-		<>
-			<Title refresh={refresh} />
-			<Temperatures {...weather.main} />
-			<OpenWeatherMapIcon weather={weather.weather[0]} />
-			<SunriseAndSunset {...weather.sys} />
-			<Wind {...weather.wind} />
-			{weather.rain && <FalldownVolume {...weather.rain} type={'Rain'} />}
-			{weather.snow && <FalldownVolume {...weather.snow} type={'Snow'} />}
-			<WeatherDetails {...weather.main} visibility={weather.visibility} />
-		</>
-	);
-});
+const CurrentWeather = memo((props: WeatherCurrentResponse) => (
+	<>
+		<Temperatures temp={props.temp} feels_like={props.feels_like} />
+		<OpenWeatherMapIcon weather={props.weather[0]} />
+		<SunriseAndSunset sunrise={props.sunrise} sunset={props.sunset} />
+		<Wind
+			speed={props.wind_speed}
+			deg={props.wind_deg}
+			gust={props.wind_gust}
+		/>
+		{props.rain && <FalldownVolume {...props.rain} type={'Rain'} />}
+		{props.snow && <FalldownVolume {...props.snow} type={'Snow'} />}
+		<WeatherDetails
+			humidity={props.humidity}
+			pressure={props.pressure}
+			visibility={props.visibility}
+		/>
+	</>
+));
 CurrentWeather.displayName = 'CurrentWeather';
 
 export default CurrentWeather;
 
-const Title = ({ refresh }: { refresh: () => void }) => (
-	<>
-		<h2 className="w-full relative text-xl text-yellow-500 pb-2">
-			Current weather in Rørvig
-			<button className="inline absolute top-1 right-0" onClick={refresh}>
-				<IoIosRefresh size={24} />
-			</button>
-		</h2>
-	</>
-);
+interface TemperatureProps {
+	temp: number;
+	feels_like: number;
+}
 
-const Temperatures = ({ temp, feels_like }: WeatherMain) => (
+const Temperatures = ({ temp, feels_like }: TemperatureProps) => (
 	<div className="w-full flex justify-evenly">
 		<span>Now: {Math.round(temp)} &#176;C</span>
 		<span>Feels like: {Math.round(feels_like)} &#176;C</span>
