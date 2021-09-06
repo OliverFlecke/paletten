@@ -86,7 +86,7 @@ interface WeatherMinutely {
 	precipitation: number;
 }
 
-interface WeatherHourly {
+export interface WeatherHourly {
 	dt: Date;
 	temp: number;
 	feels_like: number;
@@ -105,7 +105,7 @@ interface WeatherHourly {
 	snow?: WeatherFalldownVolume;
 }
 
-interface WeatherDaily {
+export interface WeatherDaily {
 	dt: Date;
 	sunrise: Date;
 	sunset: Date;

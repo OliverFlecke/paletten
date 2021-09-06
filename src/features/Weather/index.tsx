@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { IoIosRefresh } from 'react-icons/io';
 import CurrentWeather from './CurrentWeather';
+import DailyForecast from './DailyForecast';
 import { getWeather, WeatherResponse } from './weatherApi';
 
 const Weather = memo(() => {
@@ -13,16 +14,26 @@ const Weather = memo(() => {
 
 	return (
 		<>
-			<h2 className="relative section-header">
-				Weather in Rørvig
-				<button className="inline absolute top-1 right-0" onClick={refresh}>
-					<IoIosRefresh size={24} />
-				</button>
-			</h2>
+			<Title refresh={refresh} />
 			{data?.current && <CurrentWeather {...data.current} />}
+			{data?.daily && (
+				<>
+					<h4 className="section-header pt-4">Daily forecast</h4>
+					<DailyForecast data={data.daily} />
+				</>
+			)}
 		</>
 	);
 });
 
 Weather.displayName = 'Weather';
 export default Weather;
+
+const Title = ({ refresh }: { refresh: () => void }) => (
+	<h2 className="relative section-header">
+		Weather in Rørvig
+		<button className="inline absolute top-1 right-0" onClick={refresh}>
+			<IoIosRefresh size={24} />
+		</button>
+	</h2>
+);
