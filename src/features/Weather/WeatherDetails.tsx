@@ -1,39 +1,27 @@
 import React from 'react';
 import { WiBarometer, WiFog, WiHumidity } from 'react-icons/wi';
+import IconWithText from 'components/IconWithText';
+import Wind from './Wind';
 
 interface WeatherDetailsProps {
 	humidity: number;
 	pressure: number;
 	visibility: number;
+	wind: { speed: number; deg: number; gust: number };
 }
 
 const WeatherDetails = ({
 	humidity,
 	pressure,
 	visibility,
+	wind,
 }: WeatherDetailsProps) => (
-	<details>
-		<summary>More</summary>
-		<div className="grid grid-cols-2 gap-y-2 gap-x-4">
-			<span>
-				<WiHumidity size={24} className="inline" />
-				<span className="align-middle">Humidity</span>
-			</span>
-			<span>{humidity} %</span>
-
-			<span>
-				<WiBarometer size={24} className="inline" />
-				<span className="align-middle">Pressure</span>
-			</span>
-			<span>{pressure} hPa</span>
-
-			<span>
-				<WiFog size={24} className="inline" />
-				<span className="align-middle">Visibility</span>
-			</span>
-			<span>{visibility / 1000} km</span>
-		</div>
-	</details>
+	<div className="grid grid-cols-2 gap-y-2 gap-x-4">
+		<Wind {...wind} />
+		<IconWithText icon={WiHumidity}>{humidity} %</IconWithText>
+		<IconWithText icon={WiBarometer}>{pressure} hPa</IconWithText>
+		<IconWithText icon={WiFog}>{visibility / 1000} km</IconWithText>
+	</div>
 );
 
 export default WeatherDetails;

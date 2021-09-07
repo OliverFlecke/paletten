@@ -32,7 +32,7 @@ export default Weather;
 const Title = ({ refresh }: { refresh: () => void }) => (
 	<h2 className="relative section-header">
 		Weather in Rørvig
-		<button className="inline absolute top-1 right-0" onClick={refresh}>
+		<button className="inline absolute top-0 right-0" onClick={refresh}>
 			<IoIosRefresh size={24} />
 		</button>
 	</h2>

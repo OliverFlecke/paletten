@@ -1,9 +1,6 @@
 import { format } from 'date-fns';
-import React, { ReactNode, useState } from 'react';
-import OpenWeatherMapIcon from './OpenWeatherMapIcon';
-import { WeatherDaily } from './weatherApi';
+import React, { useState } from 'react';
 import { IoChevronBack, IoChevronDown } from 'react-icons/io5';
-import DegreeCelsius from '../../components/DegreeCelsius';
 import {
 	WiBarometer,
 	WiDaySunny,
@@ -11,9 +8,12 @@ import {
 	WiRain,
 	WiWindy,
 } from 'react-icons/wi';
-import { IconType } from 'react-icons';
-import SunriseAndSunset from './SunriseAndSunset';
+import DegreeCelsius from '../../components/DegreeCelsius';
+import IconWithText from '../../components/IconWithText';
 import MoonriseAndMoonset from './MoonriseAndMoonset';
+import OpenWeatherMapIcon from './OpenWeatherMapIcon';
+import SunriseAndSunset from './SunriseAndSunset';
+import { WeatherDaily } from './weatherApi';
 
 interface DailyForecastProps {
 	data: WeatherDaily[];
@@ -69,22 +69,15 @@ const DayDetails = ({ day }: { day: WeatherDaily }) => (
 			Low will be {Math.round(day.temp.min)} <DegreeCelsius />
 		</div>
 		<div className="grid grid-cols-3 py-4">
-			<Line icon={WiRain}>{day.pop} %</Line>
-			<Line icon={WiWindy}>{day.wind_speed} m/s</Line>
-			<Line icon={WiBarometer}>{day.pressure} hPa</Line>
-			<Line icon={WiHumidity}>{day.humidity} %</Line>
-			<Line icon={WiDaySunny}>{day.uvi} UVI</Line>
+			<IconWithText icon={WiRain}>{day.pop} %</IconWithText>
+			<IconWithText icon={WiWindy}>{day.wind_speed} m/s</IconWithText>
+			<IconWithText icon={WiBarometer}>{day.pressure} hPa</IconWithText>
+			<IconWithText icon={WiHumidity}>{day.humidity} %</IconWithText>
+			<IconWithText icon={WiDaySunny}>{day.uvi} UVI</IconWithText>
 		</div>
 		<SunriseAndSunset sunset={day.sunset} sunrise={day.sunrise} />
 		<MoonriseAndMoonset moonset={day.moonset} moonrise={day.moonrise} />
 		<TemperatureThroughoutDay day={day} />
-	</div>
-);
-
-const Line = ({ icon, children }: { icon: IconType; children: ReactNode }) => (
-	<div>
-		{icon({ size: 24 })}
-		<span className="pl-1 align-middle">{children}</span>
 	</div>
 );
 

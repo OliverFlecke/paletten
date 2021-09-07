@@ -30,9 +30,9 @@ const TemperatureHistory = ({ client }: TemperatureHistoryProps) => {
 
 	return (
 		<>
-			<h2>Temperature inside</h2>
+			<h2 className="section-header">Temperature inside</h2>
 			{inside && <TemperatureChart data={inside} />}
-			<h2>Temperature outside</h2>
+			<h2 className="section-header">Temperature outside</h2>
 			{outside && <TemperatureChart data={outside} />}
 		</>
 	);
