@@ -1,7 +1,7 @@
 {
 	"name": "temperature-website",
 	"homepage": "https://paletten.oliverflecke.me",
-	"version": "1.4.0",
+	"version": "1.5.0",
 	"private": true,
 	"scripts": {
 		"dev": "concurrently --kill-others --names \"JS,CSS\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn start\" \"yarn css\"",
