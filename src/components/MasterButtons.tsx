@@ -7,12 +7,14 @@ interface MasterButtonsProps {
 }
 
 const MasterButtons = ({ shellies }: MasterButtonsProps) => {
-	const allOn = useCallback(() => shellies.forEach((s) => s.setState('on')), [
-		shellies,
-	]);
-	const allOff = useCallback(() => shellies.forEach((s) => s.setState('off')), [
-		shellies,
-	]);
+	const allOn = useCallback(
+		() => shellies.forEach((s) => s.setState('on')),
+		[shellies]
+	);
+	const allOff = useCallback(
+		() => shellies.forEach((s) => s.setState('off')),
+		[shellies]
+	);
 
 	return (
 		<div className="w-full flex flex-row">
