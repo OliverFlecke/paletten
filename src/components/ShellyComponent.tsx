@@ -1,24 +1,37 @@
 import React from 'react';
 import { IoMdPower } from 'react-icons/io';
 import { stateToColor } from '../App';
+import { State } from '../models';
 import { Button } from './Button';
-import { IShelly, State } from '../models';
 
-const ShellyComponent = ({ shelly }: { shelly: IShelly }) => {
+interface ShellyCompenentProps {
+	name: string;
+	state?: State;
+	toggle: () => void;
+}
+
+const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
 	return (
-		<Button
-			className="space-x-4"
-			onClick={shelly.toggle}
-			color={stateToColor(shelly.state)}
-		>
+		<Button className="space-x-4" onClick={toggle} color={stateToColor(state)}>
 			<span className="inline-flex flex-col h-full justify-center align-middle">
 				<IoMdPower size="20px" />
 			</span>
 			<span>
-				{shelly.name} - {shelly.state === State.On ? 'Tændt' : 'Slukket'}
+				{name} - {stateToString(state)}
 			</span>
 		</Button>
 	);
 };
+
+function stateToString(state?: State): string {
+	switch (state) {
+		case State.On:
+			return 'Tændt';
+		case State.Off:
+			return 'Slukket';
+		default:
+			return 'Ukendt';
+	}
+}
 
 export default ShellyComponent;

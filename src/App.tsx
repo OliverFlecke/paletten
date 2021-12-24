@@ -12,8 +12,8 @@ import ShellyComponent from './components/ShellyComponent';
 import TemperatureHistory from './components/TemperatureHistory';
 import Weather from './features/Weather';
 import { IPlace, IShelly, Shelly, State } from './models';
-import { version } from './serviceWorker';
 
+const version = '1.5.0';
 const url = 'wss://paletten.oliverflecke.me:9001';
 
 const shelly_data = [
@@ -131,7 +131,12 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 			</section>
 			<section className="w-full flex flex-col justify-center align-middle">
 				{shellies.map((shelly) => (
-					<ShellyComponent key={shelly.id} shelly={shelly} />
+					<ShellyComponent
+						key={shelly.id}
+						name={shelly.name}
+						state={shelly.state}
+						toggle={shelly.toggle}
+					/>
 				))}
 			</section>
 
