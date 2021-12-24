@@ -12,14 +12,17 @@ const PlaceState = ({ state, name }: PlaceStateProps) => {
 			<h2 className="text-xl">{name}</h2>
 
 			<div className="flex justify-between w-full">
-				Temperatur: <span>{state.temperature} &#176;C</span>
+				Temperatur: <Value value={state.temperature} suffix="&#176;C" />
 			</div>
 			<div className="flex justify-between w-full">
-				Fugtighed:
-				<span>{state.humidity} %</span>
+				Fugtighed: <Value value={state.humidity} suffix="%" />
 			</div>
 		</div>
 	);
 };
+
+const Value = ({ value, suffix }: { value?: unknown; suffix: string }) => (
+	<span>{value === undefined ? 'ukendt' : `${value} ${suffix}`}</span>
+);
 
 export default PlaceState;
