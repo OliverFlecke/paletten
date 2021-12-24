@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { IoMdPower } from 'react-icons/io';
 import { stateToColor } from '../App';
 import { State } from '../models';
@@ -11,13 +11,15 @@ interface ShellyCompenentProps {
 }
 
 const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
+	const stateString = useMemo(() => stateToString(state), [state]);
+
 	return (
 		<Button className="space-x-4" onClick={toggle} color={stateToColor(state)}>
 			<span className="inline-flex flex-col h-full justify-center align-middle">
 				<IoMdPower size="20px" />
 			</span>
 			<span>
-				{name} - {stateToString(state)}
+				{name} - {stateString}
 			</span>
 		</Button>
 	);
