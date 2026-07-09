@@ -41,6 +41,10 @@ jobs:
           name: out
           path: out/
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
