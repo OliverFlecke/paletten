@@ -10,15 +10,13 @@ import DesiredTemperature from "components/DesiredTemperature";
 import MasterButtons from "components/MasterButtons";
 import PlaceState from "components/PlaceState";
 import ShellyComponent from "components/ShellyComponent";
-import TemperatureHistory from "components/TemperatureHistory";
-import Weather from "features/Weather";
 import { type IPlace, type IShelly, Shelly, State } from "models";
 import type React from "react";
 import { useEffect, useState } from "react";
 import pkg from "../package.json";
 
 const url =
-	process.env.NEXT_PUBLIC_MQTT_URL || "wss://paletten.oliverflecke.me:9001";
+	process.env.NEXT_PUBLIC_MQTT_URL || "wss://mqtt.oliverflecke.me:9001";
 
 const shelly_data = [
 	{ id: "C4402D", name: "Spisebord" },
@@ -155,12 +153,6 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 
 			<Seperator />
 			<DesiredTemperature client={client} />
-
-			<Seperator />
-			<Weather />
-
-			<Seperator />
-			<TemperatureHistory client={client} />
 		</>
 	);
 };
