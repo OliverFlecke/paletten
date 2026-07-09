@@ -1,14 +1,13 @@
-import { AxisBottom, AxisLeft } from '@visx/axis';
-import { Group } from '@visx/group';
-import { ParentSize } from '@visx/responsive';
-import { scaleBand, scaleLinear } from '@visx/scale';
-import { Bar } from '@visx/shape';
-import { getHours } from 'date-fns';
-import React from 'react';
-import colors from 'tailwindcss/colors';
-import { TemperatureEntry } from '../../models';
+import { AxisBottom, AxisLeft } from "@visx/axis";
+import { Group } from "@visx/group";
+import { ParentSize } from "@visx/responsive";
+import { scaleBand, scaleLinear } from "@visx/scale";
+import { Bar } from "@visx/shape";
+import { getHours } from "date-fns";
+import colors from "tailwindcss/colors";
+import type { TemperatureEntry } from "../../models";
 
-const axisColor = colors.purple['500'];
+const axisColor = colors.purple["500"];
 
 interface BarGraphProps {
 	data: TemperatureEntry[];
@@ -47,16 +46,17 @@ const BarGraph = ({ data }: BarGraphProps) => {
 
 				return (
 					<svg width={width} height={height}>
-						{data.map((d, i) => {
+						<title>Weather history in Rørvig</title>
+						{data.map((d) => {
 							const barHeight = yMax - yPoint(d);
 							return (
-								<Group key={`bar-${i}`}>
+								<Group key={`bar-${d.time}`}>
 									<Bar
 										x={xPoint(d)}
 										y={yMax - barHeight}
 										height={barHeight}
 										width={xScale.bandwidth()}
-										fill={colors.red['700']}
+										fill={colors.red["700"]}
 									/>
 								</Group>
 							);
@@ -70,7 +70,7 @@ const BarGraph = ({ data }: BarGraphProps) => {
 							tickLabelProps={() => ({
 								fill: axisColor,
 								fontSize: 11,
-								textAnchor: 'middle',
+								textAnchor: "middle",
 							})}
 						/>
 						<AxisLeft
@@ -83,7 +83,7 @@ const BarGraph = ({ data }: BarGraphProps) => {
 							tickLabelProps={() => ({
 								fill: axisColor,
 								fontSize: 11,
-								textAnchor: 'end',
+								textAnchor: "end",
 							})}
 						/>
 					</svg>

@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { IoMdPower } from 'react-icons/io';
-import { stateToColor } from '../App';
-import { State } from '../models';
-import { Button } from './Button';
+import { useMemo } from "react";
+import { IoMdPower } from "react-icons/io";
+import { State } from "../models";
+import { stateToColor } from "../utils/general";
+import { Button } from "./Button";
 
 interface ShellyCompenentProps {
 	name: string;
@@ -28,11 +28,11 @@ const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
 function stateToString(state?: State): string {
 	switch (state) {
 		case State.On:
-			return 'Tændt';
+			return "Tændt";
 		case State.Off:
-			return 'Slukket';
+			return "Slukket";
 		default:
-			return 'Ukendt';
+			return "Ukendt";
 	}
 }
 

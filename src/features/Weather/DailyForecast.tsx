@@ -1,19 +1,19 @@
-import { format } from 'date-fns';
-import React, { useState } from 'react';
-import { IoChevronBack, IoChevronDown } from 'react-icons/io5';
+import { format } from "date-fns";
+import { useState } from "react";
+import { IoChevronBack, IoChevronDown } from "react-icons/io5";
 import {
 	WiBarometer,
 	WiDaySunny,
 	WiHumidity,
 	WiRain,
 	WiWindy,
-} from 'react-icons/wi';
-import DegreeCelsius from '../../components/DegreeCelsius';
-import IconWithText from '../../components/IconWithText';
-import MoonriseAndMoonset from './MoonriseAndMoonset';
-import OpenWeatherMapIcon from './OpenWeatherMapIcon';
-import SunriseAndSunset from './SunriseAndSunset';
-import { WeatherDaily } from './weatherApi';
+} from "react-icons/wi";
+import DegreeCelsius from "../../components/DegreeCelsius";
+import IconWithText from "../../components/IconWithText";
+import MoonriseAndMoonset from "./MoonriseAndMoonset";
+import OpenWeatherMapIcon from "./OpenWeatherMapIcon";
+import SunriseAndSunset from "./SunriseAndSunset";
+import type { WeatherDaily } from "./weatherApi";
 
 interface DailyForecastProps {
 	data: WeatherDaily[];
@@ -35,16 +35,17 @@ const Day = ({ day }: { day: WeatherDaily }) => {
 	return (
 		<>
 			<button
+				type="button"
 				className="w-full flex justify-between items-center"
 				onClick={() => setIsExpanded((x) => !x)}
 			>
-				<div className="align-middle">{format(day.dt, 'E, MMM dd')}</div>
+				<div className="align-middle">{format(day.dt, "E, MMM dd")}</div>
 				<div className="flex items-center">
 					<div className="h-12">
 						<OpenWeatherMapIcon weather={day.weather[0]} />
 					</div>
 					<span>
-						{Math.round(day.temp.max)} / {Math.round(day.temp.min)}{' '}
+						{Math.round(day.temp.max)} / {Math.round(day.temp.min)}{" "}
 						<DegreeCelsius />
 					</span>
 					<div className="pl-4">

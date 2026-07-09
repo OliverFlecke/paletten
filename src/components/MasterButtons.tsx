@@ -1,18 +1,19 @@
-import React, { useCallback } from 'react';
-import { Button } from './Button';
-import { IShelly } from '../models';
+import type { IShelly } from "../models";
+import { Button } from "./Button";
 
 interface MasterButtonsProps {
 	shellies: IShelly[];
 }
 
-const MasterButtons = ({ shellies }: MasterButtonsProps) => {
-	const allOn = useCallback(() => shellies.forEach((s) => s.setState('on')), [
-		shellies,
-	]);
-	const allOff = useCallback(() => shellies.forEach((s) => s.setState('off')), [
-		shellies,
-	]);
+export default function MasterButtons({ shellies }: MasterButtonsProps) {
+	const allOn = () =>
+		shellies.forEach((s) => {
+			s.setState("on");
+		});
+	const allOff = () =>
+		shellies.forEach((s) => {
+			s.setState("off");
+		});
 
 	return (
 		<div className="w-full flex flex-row">
@@ -24,6 +25,4 @@ const MasterButtons = ({ shellies }: MasterButtonsProps) => {
 			</Button>
 		</div>
 	);
-};
-
-export default MasterButtons;
+}

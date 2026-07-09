@@ -1,4 +1,4 @@
-import { AsyncMqttClient } from 'async-mqtt';
+import type { AsyncMqttClient } from "async-mqtt";
 
 export enum State {
 	On,
@@ -25,7 +25,7 @@ export class Shelly implements IShelly {
 		this.client = client;
 	}
 
-	toggle = () => this.client.publish(this.commandPath(), 'toggle');
+	toggle = () => this.client.publish(this.commandPath(), "toggle");
 	setState = (state: string) => this.client.publish(this.commandPath(), state);
 	commandPath = () => `shellies/shelly1-${this.id}/relay/0/command`;
 }

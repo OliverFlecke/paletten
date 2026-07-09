@@ -3,19 +3,16 @@
 	"homepage": "https://paletten.oliverflecke.me",
 	"version": "1.7.1",
 	"private": true,
-	"scripts": {
-		"dev": "concurrently --kill-others --names \"JS,CSS\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn start\" \"yarn css\"",
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"predeploy": "yarn run build",
-		"deploy": "gh-pages -d build",
-		"lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
-		"css": "TAILWIND_MODE=watch yarn postcss src/styles.css -o src/index.css -v --watch"
+	"engine": {
+		"node": "26",
+		"pnpm": "11"
 	},
-	"eslintConfig": {
-		"extends": "react-app"
+	"scripts": {
+		"dev": "next dev --experimental-https",
+		"build": "next build",
+		"start": "next start",
+		"fmt": "biome format --write",
+		"export": "next build"
 	},
 	"browserslist": {
 		"production": [
@@ -39,38 +36,21 @@
 		"beautiful-react-hooks": "^1.0.0",
 		"date-fns": "^2.23.0",
 		"mqtt": "^4.0.1",
-		"react": "^17.0.1",
-		"react-dom": "^17.0.1",
-		"react-icons": "^4.2.0",
-		"react-scripts": "4.0.0"
+		"next": "^16.0.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-icons": "^4.2.0"
 	},
 	"devDependencies": {
-		"@testing-library/jest-dom": "^5.11.5",
-		"@testing-library/react": "^11.1.2",
-		"@testing-library/user-event": "^12.2.2",
-		"@types/jest": "^26.0.15",
-		"@types/node": "^14.14.7",
-		"@types/react": "^16.9.0",
-		"@types/react-dom": "^16.9.0",
-		"@types/styled-components": "^5.1.0",
-		"@typescript-eslint/eslint-plugin": "^4.7.0",
-		"@typescript-eslint/parser": "^4.7.0",
-		"autoprefixer": "^10.1.0",
-		"concurrently": "^6.2.1",
-		"eslint": "^7.13.0",
-		"eslint-config-prettier": "^6.15.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"eslint-plugin-react": "^7.21.5",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"gh-pages": "^3.1.0",
-		"postcss": "^8.4.5",
-		"postcss-cli": "^9.1.0",
-		"postcss-hash": "^3.0.0",
-		"postcss-import": "^14.0.2",
-		"postcss-nesting": "^10.1.0",
-		"prettier": "^2.1.2",
-		"react-snap": "^1.23.0",
-		"tailwindcss": "^3.0.7",
-		"typescript": "^4.0.5"
+		"@biomejs/biome": "^2.5.3",
+		"@types/node": "^22.0.0",
+		"@types/react": "^19.0.0",
+		"@types/react-dom": "^19.0.0",
+		"autoprefixer": "^10.4.0",
+		"babel-plugin-react-compiler": "^1.0.0",
+		"postcss": "^8.4.0",
+		"postcss-import": "^16.0.0",
+		"tailwindcss": "^3.4.0",
+		"typescript": "^5.0.0"
 	}
 }

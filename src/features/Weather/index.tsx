@@ -1,12 +1,12 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { IoIosRefresh } from 'react-icons/io';
-import CurrentWeather from './CurrentWeather';
-import DailyForecast from './DailyForecast';
-import { getWeather, WeatherResponse } from './weatherApi';
+import { memo, useCallback, useEffect, useState } from "react";
+import { IoIosRefresh } from "react-icons/io";
+import CurrentWeather from "./CurrentWeather";
+import DailyForecast from "./DailyForecast";
+import { getWeather, type WeatherResponse } from "./weatherApi";
 
 const Weather = memo(() => {
 	const [data, setData] = useState<WeatherResponse | undefined>();
-	const refresh = useCallback(() => getWeather().then(setData), [setData]);
+	const refresh = useCallback(() => getWeather().then(setData), []);
 
 	useEffect(() => {
 		refresh();
@@ -26,13 +26,17 @@ const Weather = memo(() => {
 	);
 });
 
-Weather.displayName = 'Weather';
+Weather.displayName = "Weather";
 export default Weather;
 
 const Title = ({ refresh }: { refresh: () => void }) => (
 	<h2 className="relative section-header">
 		Weather in Rørvig
-		<button className="inline absolute top-0 right-0" onClick={refresh}>
+		<button
+			className="inline absolute top-0 right-0"
+			onClick={refresh}
+			type="button"
+		>
 			<IoIosRefresh size={24} />
 		</button>
 	</h2>

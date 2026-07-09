@@ -1,7 +1,7 @@
-import React from 'react';
+import type { ReactNode } from "react";
 
 interface ButtonProps {
-	children: JSX.Element[] | string;
+	children: ReactNode[] | string;
 	onClick: () => void;
 	color?: string;
 	className?: string;
@@ -14,9 +14,10 @@ export const Button = ({
 	onClick,
 }: ButtonProps) => (
 	<button
+		type="button"
 		onClick={onClick}
 		className={`text-white p-2 m-2 text-xl rounded ${mapColor(
-			color ?? 'blue'
+			color ?? "blue",
 		)} ${className}`}
 	>
 		{children}
@@ -25,14 +26,14 @@ export const Button = ({
 
 function mapColor(color: string) {
 	switch (color) {
-		case 'blue':
-			return 'bg-blue-900';
-		case 'red':
-			return 'bg-red-900';
-		case 'green':
-			return 'bg-green-900';
+		case "blue":
+			return "bg-blue-900";
+		case "red":
+			return "bg-red-900";
+		case "green":
+			return "bg-green-900";
 
 		default:
-			return 'bg-gray-700';
+			return "bg-gray-700";
 	}
 }

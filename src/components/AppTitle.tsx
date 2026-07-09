@@ -1,5 +1,4 @@
-import React from 'react';
-import colors from 'tailwindcss/colors';
+import colors from "tailwindcss/colors";
 
 const titleColors = [
 	colors.rose,
@@ -12,19 +11,22 @@ const titleColors = [
 	colors.amber,
 ];
 
-const AppTitle: React.FC = () => (
-	<h1 className="text-4xl pt-2">
-		{'Paletten'.split('').map((c, i) => (
-			<span
-				key={i}
-				style={{
-					color: titleColors[i]['500'],
-				}}
-			>
-				{c}
-			</span>
-		))}
-	</h1>
-);
+const TITLE = "Paletten";
 
-export default AppTitle;
+export default function AppTitle() {
+	return (
+		<h1 className="text-4xl pt-2">
+			{TITLE.split("").map((c, i) => (
+				<span
+					// biome-ignore lint/suspicious/noArrayIndexKey: This is a static string that is being mapped over
+					key={i}
+					style={{
+						color: titleColors[i]["500"],
+					}}
+				>
+					{c}
+				</span>
+			))}
+		</h1>
+	);
+}

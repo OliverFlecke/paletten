@@ -1,6 +1,5 @@
-import React from 'react';
-import { WiWindDeg, WiWindy } from 'react-icons/wi';
-import IconWithText from '../../components/IconWithText';
+import { WiWindDeg, WiWindy } from "react-icons/wi";
+import IconWithText from "../../components/IconWithText";
 
 interface WindProps {
 	speed: number;

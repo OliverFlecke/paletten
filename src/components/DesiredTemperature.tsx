@@ -1,5 +1,6 @@
-import { AsyncMqttClient } from 'async-mqtt';
-import React, { useCallback, useEffect, useState } from 'react';
+import type { AsyncMqttClient } from "async-mqtt";
+import type React from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 	const [temperature, setTemperature] = useState<number>(0);
@@ -7,11 +8,11 @@ const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			const value = event.currentTarget.valueAsNumber;
 			setTemperature(value);
-			client.publish('temperature/set', value.toString(), {
+			client.publish("temperature/set", value.toString(), {
 				retain: true,
 			});
 		},
-		[client, setTemperature]
+		[client],
 	);
 
 	const [active, setActive] = useState(false);
@@ -19,24 +20,24 @@ const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			const value = event.currentTarget.checked;
 			setActive(value);
-			client.publish('temperature/auto', value.toString(), {
+			client.publish("temperature/auto", value.toString(), {
 				retain: true,
 			});
 		},
-		[client, setActive]
+		[client],
 	);
 
 	useEffect(() => {
-		client.on('message', (topic, message) => {
-			if (topic === 'temperature/set') {
+		client.on("message", (topic, message) => {
+			if (topic === "temperature/set") {
 				setTemperature(Number(message.toString()));
-			} else if (topic === 'temperature/auto') {
-				setActive(message.toString() === 'true');
+			} else if (topic === "temperature/auto") {
+				setActive(message.toString() === "true");
 			}
 		});
-		client.subscribe('temperature/set');
-		client.subscribe('temperature/auto');
-	}, [client, setTemperature]);
+		client.subscribe("temperature/set");
+		client.subscribe("temperature/auto");
+	}, [client]);
 
 	return (
 		<div className="w-full">
@@ -61,11 +62,10 @@ const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 					className="w-11/12 bg-transparent slider-progress"
 					style={
 						{
-							'--min': 0,
-							'--max': 25,
-							'--value': temperature,
-							// eslint-disable-next-line @typescript-eslint/no-explicit-any
-						} as any
+							"--min": 0,
+							"--max": 25,
+							"--value": temperature,
+						} as never
 					}
 					type="range"
 					min="0"

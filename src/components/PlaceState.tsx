@@ -1,5 +1,4 @@
-import React from 'react';
-import { IPlace } from '../models';
+import type { IPlace } from "../models";
 
 interface PlaceStateProps {
 	state: IPlace;
@@ -22,7 +21,7 @@ const PlaceState = ({ state, name }: PlaceStateProps) => {
 };
 
 const Value = ({ value, suffix }: { value?: unknown; suffix: string }) => (
-	<span>{value === undefined ? 'ukendt' : `${value} ${suffix}`}</span>
+	<span>{value === undefined ? "ukendt" : `${value} ${suffix}`}</span>
 );
 
 export default PlaceState;

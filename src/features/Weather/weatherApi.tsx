@@ -1,10 +1,10 @@
-const apiKey = '0694b207da3718174af5607fbd520b2d';
-const baseUrl = 'https://api.openweathermap.org/data/2.5';
+const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+const baseUrl = "https://api.openweathermap.org/data/2.5";
 const coord = { lat: 55.9441, lon: 11.7527 };
 
 export async function getWeather(): Promise<WeatherResponse> {
 	const response = await fetch(
-		`${baseUrl}/onecall?lat=${coord.lat}&lon=${coord.lon}&units=metric&appid=${apiKey}&exclude=minutely`
+		`${baseUrl}/onecall?lat=${coord.lat}&lon=${coord.lon}&units=metric&appid=${apiKey}&exclude=minutely`,
 	);
 	const data = await response.json();
 
@@ -46,8 +46,8 @@ export interface WeatherWind {
 }
 
 export interface WeatherFalldownVolume {
-	'1h': number;
-	'3h': number;
+	"1h": number;
+	"3h": number;
 }
 
 export interface WeatherResponse {

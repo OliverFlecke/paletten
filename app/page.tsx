@@ -1,25 +1,29 @@
-import {
-	AsyncMqttClient,
-	connectAsync,
-	IClientSubscribeOptions,
-} from 'async-mqtt';
-import React, { useEffect, useState } from 'react';
-import AppTitle from './components/AppTitle';
-import DesiredTemperature from './components/DesiredTemperature';
-import MasterButtons from './components/MasterButtons';
-import PlaceState from './components/PlaceState';
-import ShellyComponent from './components/ShellyComponent';
-import TemperatureHistory from './components/TemperatureHistory';
-import Weather from './features/Weather';
-import { IPlace, IShelly, Shelly, State } from './models';
-import { version } from 'serviceWorker';
+"use client";
 
-const url = 'wss://paletten.oliverflecke.me:9001';
+import {
+	type AsyncMqttClient,
+	connectAsync,
+	type IClientSubscribeOptions,
+} from "async-mqtt";
+import AppTitle from "components/AppTitle";
+import DesiredTemperature from "components/DesiredTemperature";
+import MasterButtons from "components/MasterButtons";
+import PlaceState from "components/PlaceState";
+import ShellyComponent from "components/ShellyComponent";
+import TemperatureHistory from "components/TemperatureHistory";
+import Weather from "features/Weather";
+import { type IPlace, type IShelly, Shelly, State } from "models";
+import type React from "react";
+import { useEffect, useState } from "react";
+import pkg from "../package.json";
+
+const url =
+	process.env.NEXT_PUBLIC_MQTT_URL || "wss://paletten.oliverflecke.me:9001";
 
 const shelly_data = [
-	{ id: 'C4402D', name: 'Spisebord' },
-	{ id: 'C431FB', name: 'Sofa' },
-	{ id: '10DB9C', name: 'Soveværelse' },
+	{ id: "C4402D", name: "Spisebord" },
+	{ id: "C431FB", name: "Sofa" },
+	{ id: "10DB9C", name: "Soveværelse" },
 ];
 
 const mqttOptions: IClientSubscribeOptions = { qos: 1 };
@@ -58,7 +62,7 @@ function App() {
 	return (
 		<>
 			<Main client={client} />
-			<span className="text-sm">Version: {version}</span>
+			<span className="text-sm">Version: {pkg.version}</span>
 		</>
 	);
 }
@@ -70,57 +74,63 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 	const [outside, outSetters] = usePlace();
 
 	const [shellies, setShellies] = useState<IShelly[]>(() =>
-		shelly_data.map((s) => new Shelly(s.id, s.name, client))
+		shelly_data.map((s) => new Shelly(s.id, s.name, client)),
 	);
 
 	useEffect(() => {
-		client.on('message', (topic, message) => {
-			// console.debug(`Received: ${topic} - ${message}`);
-			if (topic.startsWith('temperature/')) {
+		client.on("message", (topic, message) => {
+			if (topic.startsWith("temperature/")) {
 				switch (getPlace(topic)) {
-					case 'inside':
+					case "inside":
 						setters?.setTemperature(Number(message));
 						break;
-					case 'outside':
+					case "outside":
 						outSetters?.setTemperature(Number(message));
 						break;
 				}
-			} else if (topic.startsWith('humidity/')) {
+			} else if (topic.startsWith("humidity/")) {
 				switch (getPlace(topic)) {
-					case 'inside':
+					case "inside":
 						setters.setHumidity(Number(message));
 						break;
-					case 'outside':
+					case "outside":
 						outSetters.setHumidity(Number(message));
 						break;
 				}
 			}
 
-			if (topic.startsWith('shellies')) {
+			if (topic.startsWith("shellies")) {
 				const match = topic.match(/-(?<id>\w*)/);
 				if (match?.groups) {
-					const newState = message.toString() === 'on' ? State.On : State.Off;
-					const id = match?.groups['id'];
+					const newState = message.toString() === "on" ? State.On : State.Off;
+					const id = match?.groups.id;
 					setShellies((xs) =>
 						xs.map((s) => ({
 							...s,
 							state: s.id === id ? newState : s.state,
-						}))
+						})),
 					);
 				}
 			}
 		});
 
-		async function setupHandlers(client) {
+		async function setupHandlers(client: AsyncMqttClient) {
 			subscribe(
 				client,
-				shellies.map((x) => x.id)
+				shellies.map((x) => x.id),
 			);
 		}
 
 		setupHandlers(client);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [client]);
+	}, [
+		client,
+		outSetters?.setTemperature,
+		shellies.map,
+		setters?.setTemperature,
+		setters.setHumidity,
+		outSetters.setHumidity,
+	]);
 
 	return (
 		<>
@@ -158,9 +168,9 @@ const Main = ({ client }: { client: AsyncMqttClient }) => {
 function subscribe(client: AsyncMqttClient, ids: string[]) {
 	ids.forEach(
 		async (id) =>
-			await client.subscribe(`shellies/shelly1-${id}/relay/0`, mqttOptions)
+			await client.subscribe(`shellies/shelly1-${id}/relay/0`, mqttOptions),
 	);
-	['inside', 'outside'].forEach(async (x) => {
+	["inside", "outside"].forEach(async (x) => {
 		await client.subscribe(`temperature/${x}`, mqttOptions);
 		await client.subscribe(`humidity/${x}`, mqttOptions);
 	});
@@ -168,19 +178,7 @@ function subscribe(client: AsyncMqttClient, ids: string[]) {
 
 function getPlace(topic: string): string | undefined {
 	const match = topic.match(/\/(?<place>\w+)$/);
-	return match?.groups ? match?.groups['place'] : undefined;
-}
-
-export function stateToColor(state?: State): string {
-	switch (state) {
-		case State.Off:
-			return 'red';
-		case State.On:
-			return 'green';
-
-		default:
-			return 'grey';
-	}
+	return match?.groups ? match?.groups.place : undefined;
 }
 
 function usePlace(): [
@@ -188,7 +186,7 @@ function usePlace(): [
 	{
 		setTemperature: React.Dispatch<React.SetStateAction<number | undefined>>;
 		setHumidity: React.Dispatch<React.SetStateAction<number | undefined>>;
-	}
+	},
 ] {
 	const [temperature, setTemperature] = useState<number | undefined>();
 	const [humidity, setHumidity] = useState<number | undefined>();

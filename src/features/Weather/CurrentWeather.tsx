@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
-import FalldownVolume from './FalldownVolume';
-import OpenWeatherMapIcon from './OpenWeatherMapIcon';
-import SunriseAndSunset from './SunriseAndSunset';
-import { WeatherCurrentResponse } from './weatherApi';
-import WeatherDetails from './WeatherDetails';
+import { memo } from "react";
+import FalldownVolume from "./FalldownVolume";
+import OpenWeatherMapIcon from "./OpenWeatherMapIcon";
+import SunriseAndSunset from "./SunriseAndSunset";
+import WeatherDetails from "./WeatherDetails";
+import type { WeatherCurrentResponse } from "./weatherApi";
 
 const CurrentWeather = memo((props: WeatherCurrentResponse) => (
 	<>
@@ -24,11 +24,11 @@ const CurrentWeather = memo((props: WeatherCurrentResponse) => (
 			pressure={props.pressure}
 			visibility={props.visibility}
 		/>
-		{props.rain && <FalldownVolume {...props.rain} type={'Rain'} />}
-		{props.snow && <FalldownVolume {...props.snow} type={'Snow'} />}
+		{props.rain && <FalldownVolume {...props.rain} type={"Rain"} />}
+		{props.snow && <FalldownVolume {...props.snow} type={"Snow"} />}
 	</>
 ));
-CurrentWeather.displayName = 'CurrentWeather';
+CurrentWeather.displayName = "CurrentWeather";
 
 export default CurrentWeather;
 

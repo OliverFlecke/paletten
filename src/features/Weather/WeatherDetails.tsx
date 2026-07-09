@@ -1,7 +1,6 @@
-import React from 'react';
-import { WiBarometer, WiFog, WiHumidity } from 'react-icons/wi';
-import IconWithText from 'components/IconWithText';
-import Wind from './Wind';
+import IconWithText from "components/IconWithText";
+import { WiBarometer, WiFog, WiHumidity } from "react-icons/wi";
+import Wind from "./Wind";
 
 interface WeatherDetailsProps {
 	humidity: number;
