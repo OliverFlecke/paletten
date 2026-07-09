@@ -1,4 +1,4 @@
-import type { AsyncMqttClient } from "async-mqtt";
+import type { MqttClient } from "mqtt";
 
 export enum State {
 	On,
@@ -14,12 +14,12 @@ export interface IShelly {
 }
 
 export class Shelly implements IShelly {
-	private client: AsyncMqttClient;
+	private client: MqttClient;
 	id: string;
 	name: string;
 	state?: State | undefined;
 
-	constructor(id: string, name: string, client: AsyncMqttClient) {
+	constructor(id: string, name: string, client: MqttClient) {
 		this.id = id;
 		this.name = name;
 		this.client = client;

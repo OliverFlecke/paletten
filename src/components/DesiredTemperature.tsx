@@ -1,18 +1,19 @@
-import type { AsyncMqttClient } from "async-mqtt";
+import { useMqttContext } from "features/MqttContext";
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 
-const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
+export default function DesiredTemperature() {
+	const { mqttClient } = useMqttContext();
 	const [temperature, setTemperature] = useState<number>(0);
 	const onDesiredTemperatureChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			const value = event.currentTarget.valueAsNumber;
 			setTemperature(value);
-			client.publish("temperature/set", value.toString(), {
+			mqttClient.publish("temperature/set", value.toString(), {
 				retain: true,
 			});
 		},
-		[client],
+		[mqttClient],
 	);
 
 	const [active, setActive] = useState(false);
@@ -20,24 +21,24 @@ const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			const value = event.currentTarget.checked;
 			setActive(value);
-			client.publish("temperature/auto", value.toString(), {
+			mqttClient.publish("temperature/auto", value.toString(), {
 				retain: true,
 			});
 		},
-		[client],
+		[mqttClient],
 	);
 
 	useEffect(() => {
-		client.on("message", (topic, message) => {
+		mqttClient.on("message", (topic, message) => {
 			if (topic === "temperature/set") {
 				setTemperature(Number(message.toString()));
 			} else if (topic === "temperature/auto") {
 				setActive(message.toString() === "true");
 			}
 		});
-		client.subscribe("temperature/set");
-		client.subscribe("temperature/auto");
-	}, [client]);
+		mqttClient.subscribe("temperature/set");
+		mqttClient.subscribe("temperature/auto");
+	}, [mqttClient]);
 
 	return (
 		<div className="w-full">
@@ -79,6 +80,4 @@ const DesiredTemperature = ({ client }: { client: AsyncMqttClient }) => {
 			</div>
 		</div>
 	);
-};
-
-export default DesiredTemperature;
+}
