@@ -1,12 +1,12 @@
-import type { AsyncMqttClient } from "async-mqtt";
 import { parse } from "date-fns";
+import type { MqttClient } from "mqtt";
 import { useEffect, useState } from "react";
 import type { TemperatureEntry } from "../models";
 import { average, groupBy, uniqueHour } from "../utils/general";
 import TemperatureChart from "./charts/TemperatureChart";
 
 interface TemperatureHistoryProps {
-	client: AsyncMqttClient;
+	client: MqttClient;
 }
 
 const TemperatureHistory = ({ client }: TemperatureHistoryProps) => {

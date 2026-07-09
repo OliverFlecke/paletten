@@ -34,7 +34,6 @@
 		"@visx/responsive": "^2.1.0",
 		"@visx/scale": "^2.1.0",
 		"@visx/shape": "^2.1.0",
-		"async-mqtt": "^2.6.1",
 		"date-fns": "4.4.0",
 		"mqtt": "^5.15.2",
 		"next": "^16.2.10",
