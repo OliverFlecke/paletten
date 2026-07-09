@@ -4,5 +4,18 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      update-types:
-        - version-update:semver-minor
+    groups:
+      production-major:
+        dependency-type: production
+        update-types:
+          - major
+      production-minor:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      development:
+        dependency-type: development
+    ignore:
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
