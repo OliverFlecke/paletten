@@ -11,7 +11,6 @@ import MasterButtons from "components/MasterButtons";
 import PlaceState from "components/PlaceState";
 import ShellyComponent from "components/ShellyComponent";
 import { type IPlace, type IShelly, Shelly, State } from "models";
-import type React from "react";
 import { useEffect, useState } from "react";
 import pkg from "../package.json";
 
