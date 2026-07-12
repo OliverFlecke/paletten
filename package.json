@@ -11,6 +11,7 @@
 		"dev": "next dev --experimental-https",
 		"build": "next build",
 		"start": "next start",
+		"lint": "biome lint",
 		"fmt": "biome format --write",
 		"export": "next build",
 		"deploy": "pnpm run build && wrangler deploy",

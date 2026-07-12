@@ -1,6 +1,8 @@
 # Website for Paletten
 
-Contains website for paletten.
+[![Build and deploy](https://github.com/OliverFlecke/paletten/actions/workflows/main.yml/badge.svg)](https://github.com/OliverFlecke/paletten/actions/workflows/main.yml)
+
+Ability to control the heating system of Paletten through its web interface, and provides current status and heating/humidity information inside and outside the house.
 
 ## Build
 
