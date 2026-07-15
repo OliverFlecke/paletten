@@ -30,11 +30,11 @@
 		]
 	},
 	"dependencies": {
-		"@visx/axis": "^2.1.0",
-		"@visx/group": "^2.1.0",
-		"@visx/responsive": "^2.1.0",
-		"@visx/scale": "^2.1.0",
-		"@visx/shape": "^2.1.0",
+		"@visx/axis": "^4.0.0",
+		"@visx/group": "^4.0.0",
+		"@visx/responsive": "^4.0.0",
+		"@visx/scale": "^4.0.0",
+		"@visx/shape": "^4.0.0",
 		"date-fns": "4.4.0",
 		"mqtt": "^5.15.2",
 		"next": "^16.2.10",
