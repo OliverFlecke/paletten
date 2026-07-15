@@ -5,6 +5,10 @@ on:
       - main
   pull_request:
 
+env:
+  NODE_VERSION: 26
+  PNPM_VERSION: 11.13.0
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -16,10 +20,10 @@ jobs:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
         with:
-          version: 11
+          version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v6
         with:
-          node-version: 26
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm fmt
@@ -30,10 +34,10 @@ jobs:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
         with:
-          version: 11
+          version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v6
         with:
-          node-version: 26
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
@@ -46,11 +50,11 @@ jobs:
 
       - uses: pnpm/action-setup@v6
         with:
-          version: 11
+          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v6
         with:
-          node-version: "26"
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
@@ -65,6 +69,7 @@ jobs:
           path: out/
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: [build]
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -77,10 +82,10 @@ jobs:
 
       - uses: pnpm/action-setup@v6
         with:
-          version: 11
+          version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v6
         with:
-          node-version: "26"
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
