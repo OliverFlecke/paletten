@@ -49,9 +49,8 @@
 		"@types/react-dom": "19.2.3",
 		"@tailwindcss/postcss": "^4.0.0",
 		"babel-plugin-react-compiler": "^1.0.0",
-		"postcss": "^8.4.0",
 		"tailwindcss": "^4.0.0",
-		"typescript": "^5.9.0",
-		"wrangler": "4.107.1"
+		"typescript": "^6.0.3",
+		"wrangler": "4.110.0"
 	}
 }
