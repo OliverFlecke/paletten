@@ -1,17 +1,17 @@
 import { RefreshCw } from "lucide-react";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import CurrentWeather from "./CurrentWeather";
 import DailyForecast from "./DailyForecast";
 import styles from "./index.module.css";
 import { getWeather, type WeatherResponse } from "./weatherApi";
 
-const Weather = memo(() => {
+const Weather = memo(function Weather() {
 	const [data, setData] = useState<WeatherResponse | undefined>();
-	const refresh = useCallback(() => getWeather().then(setData), []);
+	const refresh = () => getWeather().then(setData);
 
 	useEffect(() => {
-		refresh();
-	}, [refresh]);
+		getWeather().then(setData);
+	}, []);
 
 	return (
 		<>
@@ -32,11 +32,13 @@ const Weather = memo(() => {
 Weather.displayName = "Weather";
 export default Weather;
 
-const Title = ({ refresh }: { refresh: () => void }) => (
-	<h2 className={`section-header ${styles.title}`}>
-		Weather in Rørvig
-		<button className={styles.refresh} onClick={refresh} type="button">
-			<RefreshCw size={24} />
-		</button>
-	</h2>
-);
+function Title({ refresh }: { refresh: () => void }) {
+	return (
+		<h2 className={`section-header ${styles.title}`}>
+			Weather in Rørvig
+			<button className={styles.refresh} onClick={refresh} type="button">
+				<RefreshCw size={24} />
+			</button>
+		</h2>
+	);
+}

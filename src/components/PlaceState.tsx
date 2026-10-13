@@ -6,7 +6,7 @@ interface PlaceStateProps {
 	name: string;
 }
 
-const PlaceState = ({ state, name }: PlaceStateProps) => {
+export default function PlaceState({ state, name }: PlaceStateProps) {
 	return (
 		<div className={styles.container}>
 			<h2 className={styles.heading}>{name}</h2>
@@ -19,10 +19,8 @@ const PlaceState = ({ state, name }: PlaceStateProps) => {
 			</div>
 		</div>
 	);
-};
+}
 
-const Value = ({ value, suffix }: { value?: unknown; suffix: string }) => (
-	<span>{value === undefined ? "ukendt" : `${value} ${suffix}`}</span>
-);
-
-export default PlaceState;
+function Value({ value, suffix }: { value?: unknown; suffix: string }) {
+	return <span>{value === undefined ? "ukendt" : `${value} ${suffix}`}</span>;
+}

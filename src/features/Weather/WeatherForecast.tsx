@@ -1,5 +1,3 @@
-const WeatherForecast = () => {
+export default function WeatherForecast() {
 	return <h2 className="section-header">Weather forecast</h2>;
-};
-
-export default WeatherForecast;
+}

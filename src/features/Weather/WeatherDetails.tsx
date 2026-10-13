@@ -10,18 +10,18 @@ interface WeatherDetailsProps {
 	wind: { speed: number; deg: number; gust: number };
 }
 
-const WeatherDetails = ({
+export default function WeatherDetails({
 	humidity,
 	pressure,
 	visibility,
 	wind,
-}: WeatherDetailsProps) => (
-	<div className={styles.grid}>
-		<Wind {...wind} />
-		<IconWithText icon={Droplets}>{humidity} %</IconWithText>
-		<IconWithText icon={Gauge}>{pressure} hPa</IconWithText>
-		<IconWithText icon={CloudFog}>{visibility / 1000} km</IconWithText>
-	</div>
-);
-
-export default WeatherDetails;
+}: WeatherDetailsProps) {
+	return (
+		<div className={styles.grid}>
+			<Wind {...wind} />
+			<IconWithText icon={Droplets}>{humidity} %</IconWithText>
+			<IconWithText icon={Gauge}>{pressure} hPa</IconWithText>
+			<IconWithText icon={CloudFog}>{visibility / 1000} km</IconWithText>
+		</div>
+	);
+}

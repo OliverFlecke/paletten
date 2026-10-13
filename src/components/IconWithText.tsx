@@ -7,11 +7,14 @@ interface IconWithTextProps {
 	children: ReactNode;
 }
 
-const IconWithText = ({ icon: Icon, children }: IconWithTextProps) => (
-	<div>
-		<Icon size={24} />
-		<span className={styles.text}>{children}</span>
-	</div>
-);
-
-export default IconWithText;
+export default function IconWithText({
+	icon: Icon,
+	children,
+}: IconWithTextProps) {
+	return (
+		<div>
+			<Icon size={24} />
+			<span className={styles.text}>{children}</span>
+		</div>
+	);
+}

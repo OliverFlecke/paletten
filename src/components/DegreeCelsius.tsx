@@ -1,2 +1,3 @@
-const DegreeCelsius = () => <>&#176;C</>;
-export default DegreeCelsius;
+export default function DegreeCelsius() {
+	return <>&#176;C</>;
+}

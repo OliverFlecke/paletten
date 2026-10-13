@@ -21,17 +21,17 @@ interface DailyForecastProps {
 	data: WeatherDaily[];
 }
 
-const DailyForecast = ({ data }: DailyForecastProps) => (
-	<>
-		{data.map((day) => (
-			<Day day={day} key={day.dt.getTime()} />
-		))}
-	</>
-);
+export default function DailyForecast({ data }: DailyForecastProps) {
+	return (
+		<>
+			{data.map((day) => (
+				<Day day={day} key={day.dt.getTime()} />
+			))}
+		</>
+	);
+}
 
-export default DailyForecast;
-
-const Day = ({ day }: { day: WeatherDaily }) => {
+function Day({ day }: { day: WeatherDaily }) {
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
 	return (
@@ -58,61 +58,65 @@ const Day = ({ day }: { day: WeatherDaily }) => {
 			{isExpanded && <DayDetails day={day} />}
 		</>
 	);
-};
+}
 
-const DayDetails = ({ day }: { day: WeatherDaily }) => (
-	<div className={styles.details}>
-		<div className={styles.description}>{day.weather[0].description}</div>
-		<div>
-			High will be {Math.round(day.temp.max)} <DegreeCelsius />
+function DayDetails({ day }: { day: WeatherDaily }) {
+	return (
+		<div className={styles.details}>
+			<div className={styles.description}>{day.weather[0].description}</div>
+			<div>
+				High will be {Math.round(day.temp.max)} <DegreeCelsius />
+			</div>
+			<div>
+				Low will be {Math.round(day.temp.min)} <DegreeCelsius />
+			</div>
+			<div className={styles.statsGrid}>
+				<IconWithText icon={CloudRain}>{day.pop} %</IconWithText>
+				<IconWithText icon={Wind}>{day.wind_speed} m/s</IconWithText>
+				<IconWithText icon={Gauge}>{day.pressure} hPa</IconWithText>
+				<IconWithText icon={Droplets}>{day.humidity} %</IconWithText>
+				<IconWithText icon={Sun}>{day.uvi} UVI</IconWithText>
+			</div>
+			<SunriseAndSunset sunrise={day.sunrise} sunset={day.sunset} />
+			<MoonriseAndMoonset moonrise={day.moonrise} moonset={day.moonset} />
+			<TemperatureThroughoutDay day={day} />
 		</div>
-		<div>
-			Low will be {Math.round(day.temp.min)} <DegreeCelsius />
-		</div>
-		<div className={styles.statsGrid}>
-			<IconWithText icon={CloudRain}>{day.pop} %</IconWithText>
-			<IconWithText icon={Wind}>{day.wind_speed} m/s</IconWithText>
-			<IconWithText icon={Gauge}>{day.pressure} hPa</IconWithText>
-			<IconWithText icon={Droplets}>{day.humidity} %</IconWithText>
-			<IconWithText icon={Sun}>{day.uvi} UVI</IconWithText>
-		</div>
-		<SunriseAndSunset sunrise={day.sunrise} sunset={day.sunset} />
-		<MoonriseAndMoonset moonrise={day.moonrise} moonset={day.moonset} />
-		<TemperatureThroughoutDay day={day} />
-	</div>
-);
+	);
+}
 
-const TemperatureThroughoutDay = ({ day }: { day: WeatherDaily }) => (
-	<div className={styles.temperatureGrid}>
-		<div className={styles.colStart2}>Morning</div>
-		<div>Afternoon</div>
-		<div>Evening</div>
-		<div>Night</div>
-		<div>Temp.</div>
-		<div>
-			{Math.round(day.temp.morn)} <DegreeCelsius />
+function TemperatureThroughoutDay({ day }: { day: WeatherDaily }) {
+	return (
+		<div className={styles.temperatureGrid}>
+			<div className={styles.colStart2}>Morning</div>
+			<div>Afternoon</div>
+			<div>Evening</div>
+			<div>Night</div>
+			<div>Temp.</div>
+			<div>
+				{Math.round(day.temp.morn)} <DegreeCelsius />
+			</div>
+			<div>
+				{Math.round(day.temp.day)} <DegreeCelsius />
+			</div>
+			<div>
+				{Math.round(day.temp.eve)} <DegreeCelsius />
+			</div>
+			<div>
+				{Math.round(day.temp.night)} <DegreeCelsius />
+			</div>
+			<div>Feels like</div>
+			<div>
+				{Math.round(day.feels_like.morn)} <DegreeCelsius />
+			</div>
+			<div>
+				{Math.round(day.feels_like.day)} <DegreeCelsius />
+			</div>
+			<div>
+				{Math.round(day.feels_like.eve)} <DegreeCelsius />
+			</div>
+			<div>
+				{Math.round(day.feels_like.night)} <DegreeCelsius />
+			</div>
 		</div>
-		<div>
-			{Math.round(day.temp.day)} <DegreeCelsius />
-		</div>
-		<div>
-			{Math.round(day.temp.eve)} <DegreeCelsius />
-		</div>
-		<div>
-			{Math.round(day.temp.night)} <DegreeCelsius />
-		</div>
-		<div>Feels like</div>
-		<div>
-			{Math.round(day.feels_like.morn)} <DegreeCelsius />
-		</div>
-		<div>
-			{Math.round(day.feels_like.day)} <DegreeCelsius />
-		</div>
-		<div>
-			{Math.round(day.feels_like.eve)} <DegreeCelsius />
-		</div>
-		<div>
-			{Math.round(day.feels_like.night)} <DegreeCelsius />
-		</div>
-	</div>
-);
+	);
+}

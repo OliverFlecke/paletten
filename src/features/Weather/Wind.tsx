@@ -8,11 +8,11 @@ interface WindProps {
 	gust: number;
 }
 
-const Wind = ({ speed, deg }: WindProps) => (
-	<div className={styles.container}>
-		<IconWithText icon={WindIcon}>{speed} m/s</IconWithText>
-		<Navigation size={24} style={{ transform: `rotate(${deg}deg)` }} />
-	</div>
-);
-
-export default Wind;
+export default function Wind({ speed, deg }: WindProps) {
+	return (
+		<div className={styles.container}>
+			<IconWithText icon={WindIcon}>{speed} m/s</IconWithText>
+			<Navigation size={24} style={{ transform: `rotate(${deg}deg)` }} />
+		</div>
+	);
+}

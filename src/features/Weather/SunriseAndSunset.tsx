@@ -6,17 +6,20 @@ interface SunriseAndSunsetProps {
 	sunset: Date;
 }
 
-const SunriseAndSunset = ({ sunrise, sunset }: SunriseAndSunsetProps) => (
-	<div className="evenRow">
-		<span>
-			<Sunrise size={32} />
-			{format(sunrise, "H:mm")}
-		</span>
-		<span>
-			<Sunset size={32} />
-			{format(sunset, "H:mm")}
-		</span>
-	</div>
-);
-
-export default SunriseAndSunset;
+export default function SunriseAndSunset({
+	sunrise,
+	sunset,
+}: SunriseAndSunsetProps) {
+	return (
+		<div className="evenRow">
+			<span>
+				<Sunrise size={32} />
+				{format(sunrise, "H:mm")}
+			</span>
+			<span>
+				<Sunset size={32} />
+				{format(sunset, "H:mm")}
+			</span>
+		</div>
+	);
+}

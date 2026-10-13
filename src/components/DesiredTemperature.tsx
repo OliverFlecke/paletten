@@ -1,33 +1,29 @@
 import { useMqttContext } from "features/MqttContext";
 import type React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./DesiredTemperature.module.css";
 
 export default function DesiredTemperature() {
 	const { mqttClient } = useMqttContext();
 	const [temperature, setTemperature] = useState<number>(0);
-	const onDesiredTemperatureChange = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = event.currentTarget.valueAsNumber;
-			setTemperature(value);
-			mqttClient.publish("temperature/set", value.toString(), {
-				retain: true,
-			});
-		},
-		[mqttClient],
-	);
+	const onDesiredTemperatureChange = (
+		event: React.ChangeEvent<HTMLInputElement>,
+	) => {
+		const value = event.currentTarget.valueAsNumber;
+		setTemperature(value);
+		mqttClient.publish("temperature/set", value.toString(), {
+			retain: true,
+		});
+	};
 
 	const [active, setActive] = useState(false);
-	const toggleActive = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = event.currentTarget.checked;
-			setActive(value);
-			mqttClient.publish("temperature/auto", value.toString(), {
-				retain: true,
-			});
-		},
-		[mqttClient],
-	);
+	const toggleActive = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const value = event.currentTarget.checked;
+		setActive(value);
+		mqttClient.publish("temperature/auto", value.toString(), {
+			retain: true,
+		});
+	};
 
 	useEffect(() => {
 		mqttClient.on("message", (topic, message) => {

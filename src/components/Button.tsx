@@ -8,20 +8,17 @@ interface ButtonProps {
 	className?: string;
 }
 
-export const Button = ({
-	color,
-	children,
-	className,
-	onClick,
-}: ButtonProps) => (
-	<button
-		className={`${styles.button} ${mapColor(color ?? "blue")} ${className ?? ""}`}
-		onClick={onClick}
-		type="button"
-	>
-		{children}
-	</button>
-);
+export function Button({ color, children, className, onClick }: ButtonProps) {
+	return (
+		<button
+			className={`${styles.button} ${mapColor(color ?? "blue")} ${className ?? ""}`}
+			onClick={onClick}
+			type="button"
+		>
+			{children}
+		</button>
+	);
+}
 
 function mapColor(color: string) {
 	switch (color) {

@@ -6,17 +6,20 @@ interface MoonriseAndMoonsetProps {
 	moonset: Date;
 }
 
-const MoonriseAndMoonset = ({ moonrise, moonset }: MoonriseAndMoonsetProps) => (
-	<div className="evenRow">
-		<span>
-			<Moon size={32} />
-			{format(moonrise, "H:mm")}
-		</span>
-		<span>
-			<MoonStar size={32} />
-			{format(moonset, "H:mm")}
-		</span>
-	</div>
-);
-
-export default MoonriseAndMoonset;
+export default function MoonriseAndMoonset({
+	moonrise,
+	moonset,
+}: MoonriseAndMoonsetProps) {
+	return (
+		<div className="evenRow">
+			<span>
+				<Moon size={32} />
+				{format(moonrise, "H:mm")}
+			</span>
+			<span>
+				<MoonStar size={32} />
+				{format(moonset, "H:mm")}
+			</span>
+		</div>
+	);
+}

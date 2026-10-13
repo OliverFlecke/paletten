@@ -1,5 +1,4 @@
 import { Power } from "lucide-react";
-import { useMemo } from "react";
 import { State } from "../models";
 import { stateToColor } from "../utils/general";
 import { Button } from "./Button";
@@ -11,8 +10,12 @@ interface ShellyCompenentProps {
 	toggle: () => void;
 }
 
-const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
-	const stateString = useMemo(() => stateToString(state), [state]);
+export default function ShellyComponent({
+	name,
+	state,
+	toggle,
+}: ShellyCompenentProps) {
+	const stateString = stateToString(state);
 
 	return (
 		<Button
@@ -28,7 +31,7 @@ const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
 			</span>
 		</Button>
 	);
-};
+}
 
 function stateToString(state?: State): string {
 	switch (state) {
@@ -40,5 +43,3 @@ function stateToString(state?: State): string {
 			return "Ukendt";
 	}
 }
-
-export default ShellyComponent;

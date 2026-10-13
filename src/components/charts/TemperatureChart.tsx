@@ -13,7 +13,7 @@ interface BarGraphProps {
 	data: TemperatureEntry[];
 }
 
-const BarGraph = ({ data }: BarGraphProps) => {
+export default function BarGraph({ data }: BarGraphProps) {
 	return (
 		<ParentSize>
 			{({ width }) => {
@@ -91,6 +91,4 @@ const BarGraph = ({ data }: BarGraphProps) => {
 			}}
 		</ParentSize>
 	);
-};
-
-export default BarGraph;
+}

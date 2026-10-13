@@ -9,7 +9,9 @@ interface TemperatureHistoryProps {
 	client: MqttClient;
 }
 
-const TemperatureHistory = ({ client }: TemperatureHistoryProps) => {
+export default function TemperatureHistory({
+	client,
+}: TemperatureHistoryProps) {
 	const [inside, setInside] = useState<TemperatureEntry[] | undefined>();
 	const [outside, setOutside] = useState<TemperatureEntry[] | undefined>();
 
@@ -36,9 +38,7 @@ const TemperatureHistory = ({ client }: TemperatureHistoryProps) => {
 			{outside && <TemperatureChart data={outside} />}
 		</>
 	);
-};
-
-export default TemperatureHistory;
+}
 
 function parseData(message: Buffer): TemperatureEntry[] {
 	// biome-ignore lint/suspicious/noExplicitAny: ok for parsing, but ideally should have a better type
