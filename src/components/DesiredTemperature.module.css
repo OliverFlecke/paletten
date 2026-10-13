@@ -1,0 +1,33 @@
+.container {
+	width: 100%;
+}
+
+.toggleRow {
+	display: flex;
+	gap: 0.5rem;
+	height: 100%;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.toggleLabel {
+	height: 100%;
+	vertical-align: middle;
+	font-size: 1.25rem;
+}
+
+.checkbox {
+	width: 1.5rem;
+	height: 1.5rem;
+	vertical-align: middle;
+}
+
+.rangeContainer {
+	padding-top: 1rem;
+}
+
+.range {
+	width: 92%;
+	background: transparent;
+}

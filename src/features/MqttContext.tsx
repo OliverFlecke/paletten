@@ -6,6 +6,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import styles from "./MqttContext.module.css";
 
 const MQTT_HOST =
 	process.env.NEXT_PUBLIC_MQTT_URL || "wss://mqtt.oliverflecke.me:9001";
@@ -35,15 +36,11 @@ export function MqttProvider({ children }: PropsWithChildren) {
 	}, []);
 
 	if (mqttClient === undefined) {
-		return (
-			<h2 className="text-black dark:text-white w-full text-center text-xl">
-				Connecting...
-			</h2>
-		);
+		return <h2 className={styles.status}>Connecting...</h2>;
 	}
 	if (mqttClient === null) {
 		return (
-			<h2 className="text-black dark:text-white w-full text-center text-xl">
+			<h2 className={styles.status}>
 				Failed to connect. Please contact developer
 			</h2>
 		);

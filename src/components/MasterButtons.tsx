@@ -1,5 +1,6 @@
 import type { IShelly } from "../models";
 import { Button } from "./Button";
+import styles from "./MasterButtons.module.css";
 
 interface MasterButtonsProps {
 	shellies: IShelly[];
@@ -16,11 +17,11 @@ export default function MasterButtons({ shellies }: MasterButtonsProps) {
 		});
 
 	return (
-		<div className="w-full flex flex-row">
-			<Button onClick={allOn} className="flex-grow">
+		<div className={styles.row}>
+			<Button className={styles.grow} onClick={allOn}>
 				Tænd alt
 			</Button>
-			<Button onClick={allOff} className="flex-grow">
+			<Button className={styles.grow} onClick={allOff}>
 				Sluk alt
 			</Button>
 		</div>

@@ -7,7 +7,7 @@ interface SunriseAndSunsetProps {
 }
 
 const SunriseAndSunset = ({ sunrise, sunset }: SunriseAndSunsetProps) => (
-	<div className="w-full flex justify-evenly">
+	<div className="evenRow">
 		<span>
 			<Sunrise size={32} />
 			{format(sunrise, "H:mm")}

@@ -8,21 +8,21 @@ import type { WeatherCurrentResponse } from "./weatherApi";
 const CurrentWeather = memo((props: WeatherCurrentResponse) => (
 	<>
 		<Temperatures
-			temp={props.temp}
 			feels_like={props.feels_like}
+			temp={props.temp}
 			uvi={props.uvi}
 		/>
 		<OpenWeatherMapIcon weather={props.weather[0]} />
 		<SunriseAndSunset sunrise={props.sunrise} sunset={props.sunset} />
 		<WeatherDetails
+			humidity={props.humidity}
+			pressure={props.pressure}
+			visibility={props.visibility}
 			wind={{
 				speed: props.wind_speed,
 				deg: props.wind_deg,
 				gust: props.wind_gust,
 			}}
-			humidity={props.humidity}
-			pressure={props.pressure}
-			visibility={props.visibility}
 		/>
 		{props.rain && <FalldownVolume {...props.rain} type={"Rain"} />}
 		{props.snow && <FalldownVolume {...props.snow} type={"Snow"} />}
@@ -39,7 +39,7 @@ interface TemperatureProps {
 }
 
 const Temperatures = ({ temp, feels_like, uvi }: TemperatureProps) => (
-	<div className="w-full flex justify-evenly">
+	<div className="evenRow">
 		<span>Now: {Math.round(temp)} &#176;C</span>
 		<span>Feels like: {Math.round(feels_like)} &#176;C</span>
 		<span>UV: {uvi}</span>

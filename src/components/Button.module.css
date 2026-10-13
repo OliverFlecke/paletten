@@ -1,0 +1,28 @@
+.button {
+	color: white;
+	padding: 0.5rem;
+	margin: 0.5rem;
+	font-size: 1.25rem;
+	border-radius: 0.25rem;
+	display: flex;
+	flex-direction: row;
+	gap: var(--space-2);
+	justify-content: center;
+	align-items: center;
+
+	&.blue {
+		background-color: var(--color-button-blue);
+	}
+
+	&.red {
+		background-color: var(--color-button-red);
+	}
+
+	&.green {
+		background-color: var(--color-button-green);
+	}
+
+	&.gray {
+		background-color: var(--color-button-gray);
+	}
+}

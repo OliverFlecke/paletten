@@ -1,16 +1,17 @@
 import { format } from "date-fns";
-import { useState } from "react";
 import {
 	ChevronDown,
 	ChevronLeft,
+	CloudRain,
 	Droplets,
 	Gauge,
 	Sun,
 	Wind,
-	CloudRain,
 } from "lucide-react";
+import { useState } from "react";
 import DegreeCelsius from "../../components/DegreeCelsius";
 import IconWithText from "../../components/IconWithText";
+import styles from "./DailyForecast.module.css";
 import MoonriseAndMoonset from "./MoonriseAndMoonset";
 import OpenWeatherMapIcon from "./OpenWeatherMapIcon";
 import SunriseAndSunset from "./SunriseAndSunset";
@@ -36,20 +37,20 @@ const Day = ({ day }: { day: WeatherDaily }) => {
 	return (
 		<>
 			<button
-				type="button"
-				className="w-full flex justify-between items-center"
+				className={styles.dayRow}
 				onClick={() => setIsExpanded((x) => !x)}
+				type="button"
 			>
-				<div className="align-middle">{format(day.dt, "E, MMM dd")}</div>
-				<div className="flex items-center">
-					<div className="h-12">
+				<div className={styles.date}>{format(day.dt, "E, MMM dd")}</div>
+				<div className={styles.summary}>
+					<div className={styles.icon}>
 						<OpenWeatherMapIcon weather={day.weather[0]} />
 					</div>
 					<span>
 						{Math.round(day.temp.max)} / {Math.round(day.temp.min)}{" "}
 						<DegreeCelsius />
 					</span>
-					<div className="pl-4">
+					<div className={styles.chevron}>
 						{isExpanded ? <ChevronDown /> : <ChevronLeft />}
 					</div>
 				</div>
@@ -60,32 +61,30 @@ const Day = ({ day }: { day: WeatherDaily }) => {
 };
 
 const DayDetails = ({ day }: { day: WeatherDaily }) => (
-	<div className="rounded p-2 -m-2 bg-gray-200 dark:bg-gray-800">
-		<div className="first-letter:uppercase font-bold">
-			{day.weather[0].description}
-		</div>
+	<div className={styles.details}>
+		<div className={styles.description}>{day.weather[0].description}</div>
 		<div>
 			High will be {Math.round(day.temp.max)} <DegreeCelsius />
 		</div>
 		<div>
 			Low will be {Math.round(day.temp.min)} <DegreeCelsius />
 		</div>
-		<div className="grid grid-cols-3 py-4">
+		<div className={styles.statsGrid}>
 			<IconWithText icon={CloudRain}>{day.pop} %</IconWithText>
 			<IconWithText icon={Wind}>{day.wind_speed} m/s</IconWithText>
 			<IconWithText icon={Gauge}>{day.pressure} hPa</IconWithText>
 			<IconWithText icon={Droplets}>{day.humidity} %</IconWithText>
 			<IconWithText icon={Sun}>{day.uvi} UVI</IconWithText>
 		</div>
-		<SunriseAndSunset sunset={day.sunset} sunrise={day.sunrise} />
-		<MoonriseAndMoonset moonset={day.moonset} moonrise={day.moonrise} />
+		<SunriseAndSunset sunrise={day.sunrise} sunset={day.sunset} />
+		<MoonriseAndMoonset moonrise={day.moonrise} moonset={day.moonset} />
 		<TemperatureThroughoutDay day={day} />
 	</div>
 );
 
 const TemperatureThroughoutDay = ({ day }: { day: WeatherDaily }) => (
-	<div className="grid grid-cols-5 grid-rows-3">
-		<div className="col-start-2">Morning</div>
+	<div className={styles.temperatureGrid}>
+		<div className={styles.colStart2}>Morning</div>
 		<div>Afternoon</div>
 		<div>Evening</div>
 		<div>Night</div>

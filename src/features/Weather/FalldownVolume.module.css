@@ -1,0 +1,20 @@
+.row {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.values {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.value {
+	vertical-align: middle;
+}
+
+.icon {
+	display: inline;
+	align-self: center;
+}

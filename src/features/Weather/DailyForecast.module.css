@@ -1,0 +1,54 @@
+.dayRow {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.date {
+	vertical-align: middle;
+}
+
+.summary {
+	display: flex;
+	align-items: center;
+}
+
+.icon {
+	height: 3rem;
+}
+
+.chevron {
+	padding-left: 1rem;
+}
+
+.details {
+	border-radius: 0.25rem;
+	padding: 0.5rem;
+	margin: -0.5rem;
+	background-color: var(--color-surface);
+}
+
+.description {
+	font-weight: bold;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
+.statsGrid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	padding-block: 1rem;
+}
+
+.temperatureGrid {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	grid-template-rows: repeat(3, minmax(0, 1fr));
+
+	& > .colStart2 {
+		grid-column-start: 2;
+	}
+}

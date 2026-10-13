@@ -1,8 +1,9 @@
-import { useMemo } from "react";
 import { Power } from "lucide-react";
+import { useMemo } from "react";
 import { State } from "../models";
 import { stateToColor } from "../utils/general";
 import { Button } from "./Button";
+import styles from "./ShellyComponent.module.css";
 
 interface ShellyCompenentProps {
 	name: string;
@@ -14,8 +15,12 @@ const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
 	const stateString = useMemo(() => stateToString(state), [state]);
 
 	return (
-		<Button className="space-x-4" onClick={toggle} color={stateToColor(state)}>
-			<span className="inline-flex flex-col h-full justify-center align-middle">
+		<Button
+			className={styles.button}
+			color={stateToColor(state)}
+			onClick={toggle}
+		>
+			<span className={styles.icon}>
 				<Power size="20px" />
 			</span>
 			<span>

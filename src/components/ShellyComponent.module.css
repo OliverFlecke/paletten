@@ -1,0 +1,11 @@
+.button {
+	gap: 1rem;
+}
+
+.icon {
+	display: inline-flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+	vertical-align: middle;
+}

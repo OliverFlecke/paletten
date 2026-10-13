@@ -1,0 +1,14 @@
+.dailyHeading {
+	padding-top: 1rem;
+}
+
+.title {
+	position: relative;
+}
+
+.refresh {
+	display: inline;
+	position: absolute;
+	top: 0;
+	right: 0;
+}

@@ -1,5 +1,6 @@
 import IconWithText from "components/IconWithText";
 import { CloudFog, Droplets, Gauge } from "lucide-react";
+import styles from "./WeatherDetails.module.css";
 import Wind from "./Wind";
 
 interface WeatherDetailsProps {
@@ -15,7 +16,7 @@ const WeatherDetails = ({
 	visibility,
 	wind,
 }: WeatherDetailsProps) => (
-	<div className="grid grid-cols-2 gap-y-2 gap-x-4">
+	<div className={styles.grid}>
 		<Wind {...wind} />
 		<IconWithText icon={Droplets}>{humidity} %</IconWithText>
 		<IconWithText icon={Gauge}>{pressure} hPa</IconWithText>

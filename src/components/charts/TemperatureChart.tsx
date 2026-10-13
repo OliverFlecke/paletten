@@ -4,10 +4,10 @@ import { ParentSize } from "@visx/responsive";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Bar } from "@visx/shape";
 import { getHours } from "date-fns";
-import colors from "tailwindcss/colors";
 import type { TemperatureEntry } from "../../models";
 
-const axisColor = colors.purple["500"];
+const axisColor = "#a855f7"; // purple-500
+const barColor = "#b91c1c"; // red-700
 
 interface BarGraphProps {
 	data: TemperatureEntry[];
@@ -45,46 +45,46 @@ const BarGraph = ({ data }: BarGraphProps) => {
 				const hourOffset = new Date().getTimezoneOffset() / 60;
 
 				return (
-					<svg width={width} height={height}>
+					<svg height={height} width={width}>
 						<title>Weather history in Rørvig</title>
 						{data.map((d) => {
 							const barHeight = yMax - yPoint(d);
 							return (
 								<Group key={`bar-${d.time}`}>
 									<Bar
-										x={xPoint(d)}
-										y={yMax - barHeight}
+										fill={barColor}
 										height={barHeight}
 										width={xScale.bandwidth()}
-										fill={colors.red["700"]}
+										x={xPoint(d)}
+										y={yMax - barHeight}
 									/>
 								</Group>
 							);
 						})}
 						<AxisBottom
-							top={yMax + 10}
 							scale={xScale}
-							tickFormat={(d: Date) => `${getHours(d) - hourOffset}`}
 							stroke={axisColor}
-							tickStroke={axisColor}
+							tickFormat={(d: Date) => `${getHours(d) - hourOffset}`}
 							tickLabelProps={() => ({
 								fill: axisColor,
 								fontSize: 11,
 								textAnchor: "middle",
 							})}
+							tickStroke={axisColor}
+							top={yMax + 10}
 						/>
 						<AxisLeft
-							scale={yScale}
 							left={margin.left + 10}
 							numTicks={5}
-							tickFormat={(t) => `${t} C`}
+							scale={yScale}
 							stroke={axisColor}
-							tickStroke={axisColor}
+							tickFormat={(t) => `${t} C`}
 							tickLabelProps={() => ({
 								fill: axisColor,
 								fontSize: 11,
 								textAnchor: "end",
 							})}
+							tickStroke={axisColor}
 						/>
 					</svg>
 				);

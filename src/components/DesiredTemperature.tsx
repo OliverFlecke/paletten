@@ -1,6 +1,7 @@
 import { useMqttContext } from "features/MqttContext";
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
+import styles from "./DesiredTemperature.module.css";
 
 export default function DesiredTemperature() {
 	const { mqttClient } = useMqttContext();
@@ -41,26 +42,26 @@ export default function DesiredTemperature() {
 	}, [mqttClient]);
 
 	return (
-		<div className="w-full">
-			<div className="space-x-2 h-full">
-				<label
-					htmlFor="temperature-control"
-					className="h-full align-middle text-xl"
-				>
+		<div className={styles.container}>
+			<div className={styles.toggleRow}>
+				<label className={styles.toggleLabel} htmlFor="temperature-control">
 					Automatisk temperaturkontrol?
 				</label>
 				<input
-					id="temperature-control"
-					type="checkbox"
-					onChange={toggleActive}
 					checked={active}
-					className="w-6 h-6 align-middle"
+					className={styles.checkbox}
+					id="temperature-control"
+					onChange={toggleActive}
+					type="checkbox"
 				/>
 			</div>
-			<div hidden={!active} className="pt-4">
+			<div className={styles.rangeContainer} hidden={!active}>
 				<input
+					className={styles.range}
 					id="temperature-range"
-					className="w-11/12 bg-transparent slider-progress"
+					max="25"
+					min="0"
+					onChange={onDesiredTemperatureChange}
 					style={
 						{
 							"--min": 0,
@@ -69,10 +70,7 @@ export default function DesiredTemperature() {
 						} as never
 					}
 					type="range"
-					min="0"
-					max="25"
 					value={temperature}
-					onChange={onDesiredTemperatureChange}
 				/>
 				<label htmlFor="temperature-range">
 					Ønskede temperature: {temperature} &#176;C

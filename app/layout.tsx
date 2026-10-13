@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
 import Script from "next/script";
+import type { PropsWithChildren } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,6 +14,10 @@ export const metadata: Metadata = {
 	manifest: "/manifest.json",
 };
 
+const geist = Geist({
+	subsets: ["latin"],
+});
+
 export const viewport: Viewport = {
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
@@ -19,19 +25,17 @@ export const viewport: Viewport = {
 	],
 };
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en">
 			<body>
-				<main id="root">{children}</main>
+				<main className={geist.className} id="root">
+					{children}
+				</main>
 				<Script
 					async
-					defer
 					data-domain="paletten.oliverflecke.me"
+					defer
 					src="https://plausible.oliverflecke.me/js/plausible.js"
 					strategy="afterInteractive"
 				/>

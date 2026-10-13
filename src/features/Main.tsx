@@ -8,6 +8,7 @@ import ShellyComponent from "components/ShellyComponent";
 import { type IPlace, type IShelly, Shelly, State } from "models";
 import type { IClientSubscribeOptions, MqttClient } from "mqtt";
 import { useEffect, useState } from "react";
+import styles from "./Main.module.css";
 import { MqttProvider, useMqttContext } from "./MqttContext";
 
 const SHELLIES = [
@@ -89,11 +90,11 @@ function Content() {
 
 	return (
 		<>
-			<section className="flex justify-between space-x-6 pb-4 max-w-lg w-full">
+			<section className={styles.places}>
 				<PlaceState name="Inde" state={inside} />
 				<PlaceState name="Ude" state={outside} />
 			</section>
-			<section className="w-full flex flex-col justify-center align-middle">
+			<section className={styles.shellies}>
 				{shellies.map((shelly) => (
 					<ShellyComponent
 						key={shelly.id}

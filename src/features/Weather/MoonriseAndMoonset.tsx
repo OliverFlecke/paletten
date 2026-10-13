@@ -7,7 +7,7 @@ interface MoonriseAndMoonsetProps {
 }
 
 const MoonriseAndMoonset = ({ moonrise, moonset }: MoonriseAndMoonsetProps) => (
-	<div className="w-full flex justify-evenly">
+	<div className="evenRow">
 		<span>
 			<Moon size={32} />
 			{format(moonrise, "H:mm")}

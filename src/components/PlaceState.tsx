@@ -1,4 +1,5 @@
 import type { IPlace } from "../models";
+import styles from "./PlaceState.module.css";
 
 interface PlaceStateProps {
 	state: IPlace;
@@ -7,14 +8,14 @@ interface PlaceStateProps {
 
 const PlaceState = ({ state, name }: PlaceStateProps) => {
 	return (
-		<div className="w-full max-w-xs">
-			<h2 className="text-xl">{name}</h2>
+		<div className={styles.container}>
+			<h2 className={styles.heading}>{name}</h2>
 
-			<div className="flex justify-between w-full">
-				Temperatur: <Value value={state.temperature} suffix="&#176;C" />
+			<div className={styles.row}>
+				Temperatur: <Value suffix="&#176;C" value={state.temperature} />
 			</div>
-			<div className="flex justify-between w-full">
-				Fugtighed: <Value value={state.humidity} suffix="%" />
+			<div className={styles.row}>
+				Fugtighed: <Value suffix="%" value={state.humidity} />
 			</div>
 		</div>
 	);

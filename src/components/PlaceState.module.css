@@ -1,0 +1,14 @@
+.container {
+	width: 100%;
+	max-width: 20rem;
+}
+
+.heading {
+	font-size: 1.25rem;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
