@@ -1,4 +1,4 @@
-import { WiRain, WiSnow } from "react-icons/wi";
+import { CloudRain, CloudSnow } from "lucide-react";
 import type { WeatherFalldownVolume } from "./weatherApi";
 
 interface FalldownVolumeProps extends WeatherFalldownVolume {
@@ -20,9 +20,9 @@ export default FalldownVolume;
 const Icon = ({ type }: { type: "Rain" | "Snow" }) => (
 	<>
 		{type === "Rain" ? (
-			<WiRain size={32} className="inline self-center" />
+			<CloudRain size={32} className="inline self-center" />
 		) : (
-			<WiSnow size={32} className="inline self-center" />
+			<CloudSnow size={32} className="inline self-center" />
 		)}
 	</>
 );

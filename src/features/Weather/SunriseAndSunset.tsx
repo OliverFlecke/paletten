@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { WiSunrise, WiSunset } from "react-icons/wi";
+import { Sunrise, Sunset } from "lucide-react";
 
 interface SunriseAndSunsetProps {
 	sunrise: Date;
@@ -9,11 +9,11 @@ interface SunriseAndSunsetProps {
 const SunriseAndSunset = ({ sunrise, sunset }: SunriseAndSunsetProps) => (
 	<div className="w-full flex justify-evenly">
 		<span>
-			<WiSunrise size={32} />
+			<Sunrise size={32} />
 			{format(sunrise, "H:mm")}
 		</span>
 		<span>
-			<WiSunset size={32} />
+			<Sunset size={32} />
 			{format(sunset, "H:mm")}
 		</span>
 	</div>

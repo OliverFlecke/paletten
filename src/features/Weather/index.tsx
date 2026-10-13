@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import { IoIosRefresh } from "react-icons/io";
+import { RefreshCw } from "lucide-react";
 import CurrentWeather from "./CurrentWeather";
 import DailyForecast from "./DailyForecast";
 import { getWeather, type WeatherResponse } from "./weatherApi";
@@ -37,7 +37,7 @@ const Title = ({ refresh }: { refresh: () => void }) => (
 			onClick={refresh}
 			type="button"
 		>
-			<IoIosRefresh size={24} />
+			<RefreshCw size={24} />
 		</button>
 	</h2>
 );

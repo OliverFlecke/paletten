@@ -1,4 +1,4 @@
-import { WiWindDeg, WiWindy } from "react-icons/wi";
+import { Navigation, Wind as WindIcon } from "lucide-react";
 import IconWithText from "../../components/IconWithText";
 
 interface WindProps {
@@ -9,8 +9,8 @@ interface WindProps {
 
 const Wind = ({ speed, deg }: WindProps) => (
 	<div className="flex space-x-2 items-center">
-		<IconWithText icon={WiWindy}>{speed} m/s</IconWithText>
-		<WiWindDeg transform={`rotate(${deg})`} size={24} />
+		<IconWithText icon={WindIcon}>{speed} m/s</IconWithText>
+		<Navigation style={{ transform: `rotate(${deg}deg)` }} size={24} />
 	</div>
 );
 

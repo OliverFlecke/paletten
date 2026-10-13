@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IoMdPower } from "react-icons/io";
+import { Power } from "lucide-react";
 import { State } from "../models";
 import { stateToColor } from "../utils/general";
 import { Button } from "./Button";
@@ -16,7 +16,7 @@ const ShellyComponent = ({ name, state, toggle }: ShellyCompenentProps) => {
 	return (
 		<Button className="space-x-4" onClick={toggle} color={stateToColor(state)}>
 			<span className="inline-flex flex-col h-full justify-center align-middle">
-				<IoMdPower size="20px" />
+				<Power size="20px" />
 			</span>
 			<span>
 				{name} - {stateString}

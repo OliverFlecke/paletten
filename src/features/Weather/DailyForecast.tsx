@@ -1,13 +1,14 @@
 import { format } from "date-fns";
 import { useState } from "react";
-import { IoChevronBack, IoChevronDown } from "react-icons/io5";
 import {
-	WiBarometer,
-	WiDaySunny,
-	WiHumidity,
-	WiRain,
-	WiWindy,
-} from "react-icons/wi";
+	ChevronDown,
+	ChevronLeft,
+	Droplets,
+	Gauge,
+	Sun,
+	Wind,
+	CloudRain,
+} from "lucide-react";
 import DegreeCelsius from "../../components/DegreeCelsius";
 import IconWithText from "../../components/IconWithText";
 import MoonriseAndMoonset from "./MoonriseAndMoonset";
@@ -49,7 +50,7 @@ const Day = ({ day }: { day: WeatherDaily }) => {
 						<DegreeCelsius />
 					</span>
 					<div className="pl-4">
-						{isExpanded ? <IoChevronDown /> : <IoChevronBack />}
+						{isExpanded ? <ChevronDown /> : <ChevronLeft />}
 					</div>
 				</div>
 			</button>
@@ -70,11 +71,11 @@ const DayDetails = ({ day }: { day: WeatherDaily }) => (
 			Low will be {Math.round(day.temp.min)} <DegreeCelsius />
 		</div>
 		<div className="grid grid-cols-3 py-4">
-			<IconWithText icon={WiRain}>{day.pop} %</IconWithText>
-			<IconWithText icon={WiWindy}>{day.wind_speed} m/s</IconWithText>
-			<IconWithText icon={WiBarometer}>{day.pressure} hPa</IconWithText>
-			<IconWithText icon={WiHumidity}>{day.humidity} %</IconWithText>
-			<IconWithText icon={WiDaySunny}>{day.uvi} UVI</IconWithText>
+			<IconWithText icon={CloudRain}>{day.pop} %</IconWithText>
+			<IconWithText icon={Wind}>{day.wind_speed} m/s</IconWithText>
+			<IconWithText icon={Gauge}>{day.pressure} hPa</IconWithText>
+			<IconWithText icon={Droplets}>{day.humidity} %</IconWithText>
+			<IconWithText icon={Sun}>{day.uvi} UVI</IconWithText>
 		</div>
 		<SunriseAndSunset sunset={day.sunset} sunrise={day.sunrise} />
 		<MoonriseAndMoonset moonset={day.moonset} moonrise={day.moonrise} />

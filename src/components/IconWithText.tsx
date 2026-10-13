@@ -1,14 +1,14 @@
+import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import type { IconType } from "react-icons";
 
 interface IconWithTextProps {
-	icon: IconType;
+	icon: LucideIcon;
 	children: ReactNode;
 }
 
-const IconWithText = ({ icon, children }: IconWithTextProps) => (
+const IconWithText = ({ icon: Icon, children }: IconWithTextProps) => (
 	<div>
-		{icon({ size: 24 })}
+		<Icon size={24} />
 		<span className="pl-1 align-middle">{children}</span>
 	</div>
 );

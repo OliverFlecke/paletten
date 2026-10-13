@@ -1,5 +1,5 @@
 import IconWithText from "components/IconWithText";
-import { WiBarometer, WiFog, WiHumidity } from "react-icons/wi";
+import { CloudFog, Droplets, Gauge } from "lucide-react";
 import Wind from "./Wind";
 
 interface WeatherDetailsProps {
@@ -17,9 +17,9 @@ const WeatherDetails = ({
 }: WeatherDetailsProps) => (
 	<div className="grid grid-cols-2 gap-y-2 gap-x-4">
 		<Wind {...wind} />
-		<IconWithText icon={WiHumidity}>{humidity} %</IconWithText>
-		<IconWithText icon={WiBarometer}>{pressure} hPa</IconWithText>
-		<IconWithText icon={WiFog}>{visibility / 1000} km</IconWithText>
+		<IconWithText icon={Droplets}>{humidity} %</IconWithText>
+		<IconWithText icon={Gauge}>{pressure} hPa</IconWithText>
+		<IconWithText icon={CloudFog}>{visibility / 1000} km</IconWithText>
 	</div>
 );
 
