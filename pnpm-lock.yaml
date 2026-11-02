@@ -30,8 +30,8 @@ importers:
         specifier: 1.55.0
         version: 1.55.0(@types/react@19.3.0)(react@19.3.0)
       mqtt:
-        specifier: 5.16.0
-        version: 5.16.0
+        specifier: 5.16.1
+        version: 5.16.1
       next:
         specifier: 16.4.0
         version: 16.4.0(@types/node@26.6.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -787,8 +787,8 @@ packages:
   mqtt-packet@9.0.2:
     resolution: {integrity: sha512-MvIY0B8/qjq7bKxdN1eD+nrljoeaai+qjLJgfRn3TiMuz0pamsIWY2bFODPZMSNmabsLANXsLl4EMoWvlaTZWA==}
 
-  mqtt@5.16.0:
-    resolution: {integrity: sha512-G0VsEtuJz5sJUgZJaaADMVfW7SIFPzkIuHR+d6rk+tBeSwdCfd9BaIRycRfd2AbyFDEmLlFM+SDQeti/+IbOnw==}
+  mqtt@5.16.1:
+    resolution: {integrity: sha512-9aEaiR/mLblsMAiynD8quhcGTaINdta2bdyknAtfVzESfoe6Ncdh/uEs5p+3zqcTEtgYErwL4pNk0QkAynXxlg==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -1541,7 +1541,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  mqtt@5.16.0:
+  mqtt@5.16.1:
     dependencies:
       '@types/readable-stream': 4.0.25
       '@types/ws': 8.18.2
