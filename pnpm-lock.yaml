@@ -46,8 +46,8 @@ importers:
         specifier: 2.5.15
         version: 2.5.15
       '@css-modules-kit/ts-plugin':
-        specifier: 1.4.0
-        version: 1.4.0(typescript@7.0.2)
+        specifier: 1.4.1
+        version: 1.4.1(typescript@7.0.2)
       '@types/node':
         specifier: 26.6.5
         version: 26.6.5
@@ -139,14 +139,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@css-modules-kit/core@1.4.0':
-    resolution: {integrity: sha512-WXw8BHVvr4Tvp9Wfp1vz9hZoANq2Se5wc9V+GvDpkKY56Z5Uy5hb+o+gfD0JrvYJgUft0IHe7v4StE6370Z0HQ==}
+  '@css-modules-kit/core@1.4.1':
+    resolution: {integrity: sha512-adGAaE+4F6n1eVRPAa7GU6B+hTV2MeH/ACJ1MvufI/1rAdzjwgT1SujoH13y9RyRvKWBhyFYpOahPd8oZsQWug==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       typescript: ^5.7.3 || ^6.0.0
 
-  '@css-modules-kit/ts-plugin@1.4.0':
-    resolution: {integrity: sha512-1UEcintU71sgy5nxvFzzNMbMojWcjBWkokd3TNbYadwTeCx91GzsmUzd3Mkwc/F2+fW6jNpv6rVaGZ1/F98mEQ==}
+  '@css-modules-kit/ts-plugin@1.4.1':
+    resolution: {integrity: sha512-RMWxKQsIyQatpLkPt4jD/FgqDmHjwghhCGGc8sXaDzytt+6DgcO7lp4eCTQtHJ5CrJHvdX6Sf+CrSwAoz3cMvg==}
     engines: {node: '>=22.12.0'}
     peerDependencies:
       typescript: ^5.6.3 || ^6.0.0
@@ -1028,7 +1028,7 @@ snapshots:
   '@biomejs/cli-win32-x64@2.5.15':
     optional: true
 
-  '@css-modules-kit/core@1.4.0(typescript@7.0.2)':
+  '@css-modules-kit/core@1.4.1(typescript@7.0.2)':
     dependencies:
       postcss: 8.5.29
       postcss-safe-parser: 7.1.0(postcss@8.5.29)
@@ -1036,9 +1036,9 @@ snapshots:
       postcss-value-parser: 4.2.0
       typescript: 7.0.2
 
-  '@css-modules-kit/ts-plugin@1.4.0(typescript@7.0.2)':
+  '@css-modules-kit/ts-plugin@1.4.1(typescript@7.0.2)':
     dependencies:
-      '@css-modules-kit/core': 1.4.0(typescript@7.0.2)
+      '@css-modules-kit/core': 1.4.1(typescript@7.0.2)
       '@volar/language-core': 2.4.28
       '@volar/typescript': 2.4.28(typescript@7.0.2)
       typescript: 7.0.2

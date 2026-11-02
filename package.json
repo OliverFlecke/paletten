@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.5.15",
-		"@css-modules-kit/ts-plugin": "1.4.0",
+		"@css-modules-kit/ts-plugin": "1.4.1",
 		"@types/node": "26.6.5",
 		"@types/react": "19.3.0",
 		"@types/react-dom": "19.3.0",
