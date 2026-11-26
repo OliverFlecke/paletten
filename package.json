@@ -45,8 +45,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.6.9",
 		"@css-modules-kit/ts-plugin": "1.4.2",
-		"@types/node": "26.6.6",
-		"@types/react": "19.3.0",
+		"@types/node": "26.6.10",
+		"@types/react": "19.3.3",
 		"@types/react-dom": "19.3.0",
 		"babel-plugin-react-compiler": "1.0.0",
 		"typescript": "7.0.2"
