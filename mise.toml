@@ -1,5 +1,5 @@
 [tools]
-hk = "2.13.0"
+hk = "2.14.0"
 node = "26.13"
 pnpm = "12.23"
 wrangler = { version = "4.168", allow_builds = ["esbuild", "sharp", "workerd"] }
